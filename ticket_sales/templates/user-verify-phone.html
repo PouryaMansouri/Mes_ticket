@@ -1,0 +1,15 @@
+{% extends 'layout/_base.html' %}
+{% load static %}
+{% block title %}ثبت نام{% endblock %}
+{% block content %}
+<div id="reserve-content">
+    <form>
+        <fieldset>
+            <legend>تایید شماره موبایل</legend>
+            <label for="verify-code">کد تایید</label>
+            <input id="verify-code" class="ltr p-2" type="text" required name="verify-code" ><br/>
+            <input type="submit" value="ثبت نام">
+        </fieldset>
+    </form>
+</div>
+{% endblock %}

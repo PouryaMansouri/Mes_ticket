@@ -1,0 +1,22 @@
+{% extends 'layout/_base.html' %}
+{% load static %}
+{% block title %}ثبت نام{% endblock %}
+{% block content %}
+    <div id="reserve-content">
+        <form method="get" action="{% url 'customers:verify-phone' %}">
+            {% csrf_token %}
+            <fieldset>
+                <legend>ثبت نام کاربر</legend>
+                <label for="first-name">نام</label>
+                <input class="p-2" id="first-name" type="text" required name="first-name"><br/>
+                <label for="last-name">نام خانوادگی</label>
+                <input class="p-2" id="last-name" type="text" required name="last-name"><br/>
+                <label for="national-code">کد ملی</label>
+                <input class="p-2" id="national-code" type="text" required name="national-code"><br/>
+                <label for="phone">موبایل</label>
+                <input class="p-2" id="phone" type="text" required name="phone"><br/>
+                <input type="submit" value="ارسال کد تایید">
+            </fieldset>
+        </form>
+    </div>
+{% endblock %}

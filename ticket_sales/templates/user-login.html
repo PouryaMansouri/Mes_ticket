@@ -1,0 +1,16 @@
+{% extends 'layout/_base.html' %}
+{% load static %}
+{% block title %}ورود{% endblock %}
+{% block content %}
+<div id="reserve-content">
+    <form>
+        <fieldset>
+            <legend>ورود کاربر</legend>
+            <label for="phone">موبایل</label>
+            <input id="phone" class="ltr p-2" type="text" required name="phone" placeholder="09123456789"><br/>
+            <input type="submit" value="ورود">
+            <p class="text-center">حساب کاربری ندارید؟ <a href="{% url 'customers:register' %}">اینجا</a> ثبت نام کنید</p>
+        </fieldset>
+    </form>
+</div>
+{% endblock %}
