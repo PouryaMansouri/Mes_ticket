@@ -20,8 +20,10 @@ class OTPAPIView(APIView):
             user.save()
             return Response(status=200)
         else:
-            return Response(data={
-                'message': _('You haven\'t registered yet with this phone number!')
-            },
+            return Response(
+                data=
+                {
+                    'message': _('You haven\'t registered yet with this phone number!')
+                },
                 status=400
             )
