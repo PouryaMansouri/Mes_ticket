@@ -28,6 +28,7 @@ class User(AbstractUser):
 
     phone = models.CharField(
         max_length=14,
+        verbose_name=_('Phone'),
         unique=True,
         validators=[RegexValidator(
             regex='^(0)?9\d{9}$',
@@ -37,6 +38,7 @@ class User(AbstractUser):
 
     national_code = models.CharField(
         max_length=10,
+        verbose_name=_('National Code'),
         unique=True,
         validators=[RegexValidator(
             regex="^(?!(\d)\1{9})\d{10}$",
@@ -45,6 +47,10 @@ class User(AbstractUser):
     )
 
     USERNAME_FIELD = 'phone'
+
+    def save(self, *args, **kwargs):
+        self.username = self.phone
+        super().save(*args, **kwargs)
 
 
 class SingletonBaseModel(models.Model):
