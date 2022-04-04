@@ -21,7 +21,7 @@ class SiteSetting(SingletonBaseModel):
         default='site_settings/default_customer.png',
         upload_to='site_settings',
         verbose_name=_('Home Banner'),
-        help_text=_('Please upload an image with x width and y height!')
+        help_text=_('Please upload an image with 740 width and 110 height!')
     )
 
     contact_phone = models.CharField(
