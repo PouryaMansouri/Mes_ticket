@@ -26,10 +26,56 @@
                 <input id="username" class="p-2" type="text" required name="username" placeholder="09123456789"><br/>
                 <label for="password">کد تایید</label>
                 <input id="password" class="p-2" type="password" required name="password"><br/>
+                <center>
+                    <button id="sms-button" class="btn btn-dark m-auto countdown" type="button"
+                            onclick="sms_sender($('#username').val())">ارسال
+                        کد
+                    </button>
+                </center>
                 <input type="submit" value="ورود">
-                <p class="text-center"><b class="bg-dark rounded">حساب کاربری ندارید؟ <a href="{% url 'customers:register' %}">اینجا</a> ثبت نام
+                <p class="text-center"><b class="bg-dark rounded">حساب کاربری ندارید؟ <a
+                        href="{% url 'customers:register' %}">اینجا</a> ثبت نام
                     کنید</b></p>
             </fieldset>
         </form>
     </div>
+{% endblock %}
+{% block extra_scripts %}
+    <script>
+        function sms_sender(phone) {
+            $.ajax({
+                url: "{% url 'customers:otpapiview' %}",
+                method: "POST",
+                data: {
+                    phone: phone
+                },
+                success: function () {
+                    $('#sms-button').attr('onclick', '')
+                    var timer2 = "1:00";
+                    var interval = setInterval(function () {
+                        var timer = timer2.split(':');
+                        //by parsing integer, I avoid all extra string processing
+                        var minutes = parseInt(timer[0], 10);
+                        var seconds = parseInt(timer[1], 10);
+                        --seconds;
+                        minutes = (seconds < 0) ? --minutes : minutes;
+
+                        seconds = (seconds < 0) ? 59 : seconds;
+                        seconds = (seconds < 10) ? '0' + seconds : seconds;
+                        //minutes = (minutes < 10) ?  minutes : minutes;
+                        $('.countdown').html(minutes + ':' + seconds);
+                        timer2 = minutes + ':' + seconds;
+                        if (minutes < 0) {
+                            $('#sms-button').attr('onclick', `sms_sender($('#username').val())`)
+                            $('#sms-button').html('ارسال کد')
+                            clearInterval(interval);
+                        }
+                    }, 1000);
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+            })
+        }
+    </script>
 {% endblock %}
