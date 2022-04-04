@@ -6,7 +6,7 @@ class UserRegister(CreateView):
 
 
 class Login(TemplateView):
-    pass
+    template_name = 'user-login.html'
 
 
 class VerifyPhoneAndCreateCustomer(CreateView):
