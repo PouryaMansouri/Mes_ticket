@@ -4,6 +4,9 @@
 {% block content %}
     <div id="reserve-content">
         <form method="post">
+            <div id="otp-error-container" class="alert alert-danger d-none">
+                <strong id="otp-error"></strong>
+            </div>
             {% csrf_token %}
             {% if form.errors %}
                 {% for field in form %}
@@ -73,6 +76,8 @@
                     }, 1000);
                 },
                 error: function (error) {
+                    $('#otp-error-container').removeClass('d-none')
+                    $('#otp-error').html(error.responseJSON.message)
                     console.log(error)
                 }
             })
