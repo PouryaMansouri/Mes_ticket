@@ -3,10 +3,10 @@
     margin: 0;
     border: 0;
     list-style-type: none;
-    font-family: IRANSans;
+    font-family: IRANSans, serif;
 }
 body{
-    background: url("../image/bg.png")no-repeat;
+    background: url("../image/bg.jpg")no-repeat;
     background-size: cover;
     direction: rtl;
     background-attachment: fixed;
