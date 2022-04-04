@@ -15,6 +15,15 @@ class SiteSetting(SingletonBaseModel):
         verbose_name=_('Site Name'),
     )
 
+    bg_image = models.ImageField(
+        null=True,
+        blank=True,
+        default='site_settings/bg.jpg',
+        upload_to='site_settings',
+        verbose_name=_('Background Image'),
+        help_text=_('Please upload an image with 830 width and 480 height!')
+    )
+
     home_banner = models.ImageField(
         null=True,
         blank=True,
