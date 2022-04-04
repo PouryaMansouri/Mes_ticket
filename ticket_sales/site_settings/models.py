@@ -18,7 +18,7 @@ class SiteSetting(SingletonBaseModel):
     home_banner = models.ImageField(
         null=True,
         blank=True,
-        default='site_settings/default_customer.png',
+        default='site_settings/banner.png',
         upload_to='site_settings',
         verbose_name=_('Home Banner'),
         help_text=_('Please upload an image with 740 width and 110 height!')
