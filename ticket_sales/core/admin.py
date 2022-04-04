@@ -8,3 +8,7 @@ UserAdmin.search_fields = ('phone', 'first_name', 'last_name')
 UserAdmin.ordering = ('phone',)
 UserAdmin.fieldsets[0][1]['fields'] = ('phone', 'password')
 admin.site.register(User, UserAdmin)
+
+
+class BaseAdmin(admin.ModelAdmin):
+    pass
