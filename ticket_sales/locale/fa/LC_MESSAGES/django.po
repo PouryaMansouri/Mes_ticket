@@ -17,82 +17,43 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Translated-Using: django-rosetta 0.9.8\n"
 
 #: core/apps.py:8
 msgid "Users"
-msgstr ""
+msgstr "کاربران"
 
 #: core/models.py:16
 msgid "Create Timestamp"
-msgstr ""
+msgstr "زمان ساخت"
 
 #: core/models.py:22
 msgid "Update Timestamp"
-msgstr ""
+msgstr "زمان بروزرسانی"
 
 #: core/models.py:34
 msgid "Please Enter a Valid Phone Number!"
-msgstr ""
+msgstr "لطفا شماره موبال معتبری وارد نمایید!"
 
 #: core/models.py:43
 msgid "National code isn't valid!"
-msgstr ""
-
-#: customers/apps.py:8 customers/models.py:10
-msgid "Customers"
-msgstr ""
-
-#: customers/models.py:9
-msgid "Customer"
-msgstr ""
-
-#: events/apps.py:8 events/models.py:12
-msgid "Events"
-msgstr ""
-
-#: events/models.py:11 events/models.py:16
-msgid "Event"
-msgstr ""
-
-#: events/models.py:20
-msgid "Capacity"
-msgstr ""
-
-#: events/models.py:24
-msgid "Remaining Capacity"
-msgstr ""
-
-#: events/models.py:36
-msgid "Ticket"
-msgstr ""
-
-#: events/models.py:37
-msgid "Tickets"
-msgstr ""
-
-#: events/models.py:51
-msgid "Price"
-msgstr ""
-
-#: events/models.py:52
-msgid "Price in Toman!"
-msgstr ""
+msgstr "کدملی معتبر نمیباشد!"
 
 #: site_settings/apps.py:8 site_settings/models.py:11
 msgid "Site Settings"
-msgstr ""
+msgstr "تنظیمات سایت"
 
 #: site_settings/models.py:10
 msgid "Site Setting"
-msgstr ""
+msgstr "تنظیمات سایت"
 
 #: site_settings/models.py:15
 msgid "Site Name"
-msgstr ""
+msgstr "نام سایت"
 
 #: site_settings/models.py:23
 msgid "Home Banner"
-msgstr ""
+msgstr "بنر صفحه اصلی"
 
 #: site_settings/models.py:24
 msgid "Please upload an image with x width and y height!"
@@ -100,16 +61,25 @@ msgstr ""
 
 #: site_settings/models.py:30
 msgid "Contact Phone"
-msgstr ""
+msgstr "شماره تماس ثابت"
 
 #: site_settings/models.py:31
 msgid "This is const phone. write it with pre number!"
-msgstr ""
+msgstr "تلفن ثابت به همراه پیش شماره!"
 
 #: site_settings/models.py:34
+#| msgid "Please Enter a Valid Phone Number!"
 msgid "Please Enter a Valid Phone!"
-msgstr ""
+msgstr "لطفا تلفن معتبری وارد نمایید!"
 
-#: site_settings/models.py:39
-msgid "Email Address"
-msgstr ""
+#: tickets/models.py:9 tickets/models.py:14
+msgid "Event"
+msgstr "رویداد"
+
+#: tickets/models.py:10
+msgid "Events"
+msgstr "رویدادها"
+
+#: tickets/models.py:18
+msgid "Capacity"
+msgstr "ظرفیت"
