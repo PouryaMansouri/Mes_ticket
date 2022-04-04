@@ -1,6 +1,6 @@
 {% extends 'layout/_base.html' %}
 {% load static %}
-{% block title %}مستر بلیت{% endblock %}
+{% block title %}{{ site_settings.site_name }}{% endblock %}
 {% block content %}
 <div id="search-content">
     <div id="sidebar">
@@ -19,7 +19,7 @@
         </div>
     </div>
     <div id="content">
-        <img id="baner" src="{% static 'image/baner.gif' %}" alt="خرید بلیت">
+        <img id="baner" src="{% static 'image/banner.png' %}" alt="خرید بلیت">
         <div class="ticket">
             <img class="co-logo" src="{% static 'image/Kaspian.jpg' %}" alt=""/>
             <h3>تهران 15:30</h3>
