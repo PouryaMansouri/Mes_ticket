@@ -13,7 +13,15 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     {% block extra_head %}{% endblock %}
 </head>
-<body>
+<body style="background-image: url('{% static 'image/bg.jpg' %}');
+    background-position-x: initial;
+    background-position-y: initial;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: initial;">
 {% include 'layout/__header.html' %}
 {% block content %}{% endblock %}
 {% include 'layout/__footer.html' %}
