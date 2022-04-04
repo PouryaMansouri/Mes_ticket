@@ -1,3 +1,13 @@
-from django.shortcuts import render
+from django.views.generic import CreateView, TemplateView
 
-# Create your views here.
+
+class UserRegister(CreateView):
+    pass
+
+
+class Login(TemplateView):
+    pass
+
+
+class VerifyPhoneAndCreateCustomer(CreateView):
+    pass
