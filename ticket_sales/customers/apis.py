@@ -6,6 +6,7 @@ from rest_framework.views import APIView
 from core.models import User
 from customers.models import Customer
 from utils import send_otp_code
+from django.utils.translation import gettext_lazy as _
 
 
 class OTPAPIView(APIView):
@@ -19,4 +20,8 @@ class OTPAPIView(APIView):
             user.save()
             return Response(status=200)
         else:
-            return Response(status=400)
+            return Response(data={
+                'message': _('You haven\'t registered yet with this phone number!')
+            },
+                status=400
+            )
