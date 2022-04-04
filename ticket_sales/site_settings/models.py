@@ -35,7 +35,7 @@ class SiteSetting(SingletonBaseModel):
         )]
     )
 
-    email = models.EmailField(
+    contact_email = models.EmailField(
         verbose_name=_('Email Address'),
     )
 
