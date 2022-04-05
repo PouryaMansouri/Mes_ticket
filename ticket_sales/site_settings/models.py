@@ -1,3 +1,4 @@
+from colorfield.fields import ColorField
 from django.core.validators import RegexValidator
 from django.db import models
 
@@ -53,6 +54,24 @@ class SiteSetting(SingletonBaseModel):
         blank=True,
         verbose_name=_('Description'),
         help_text=_('Write description of site! It will be add in site footer!'),
+    )
+
+    site_name_color = ColorField(
+        default='#FFFFFF',
+        verbose_name=_('رنگ تیتر سایت'),
+        blank=True,
+    )
+
+    navbar_text_color = ColorField(
+        default='#FFFFFF',
+        verbose_name=_('رنگ متن نوار بالای سایت'),
+        blank=True,
+    )
+
+    footer_text_color = ColorField(
+        default='#FFFFFF',
+        verbose_name=_('رنگ متن پاورقی سایت'),
+        blank=True,
     )
 
     def __str__(self):
