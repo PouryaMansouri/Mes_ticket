@@ -1,17 +1,17 @@
 <div id="footer">
     <div id="footer-container">
         <div id="top-footer">
-            <p>با {{ site_settings.site_name }} در ارتباط باشید!</p>
+            <p>با {% if site_settings.site_name %}{{ site_settings.site_name }} {% else %}"نام سایت"{% endif %}
+                در ارتباط باشید!</p>
             <p>{{ site_settings.contact_phone }}</p>
             <p>{{ site_settings.contact_email }}</p>
             <div class="clear"></div>
         </div>
         <div id="bottom-footer">
-            <p>مستر بلیت سامانه آنلاین خرید بلیت هواپیما، بلیت قطار و بلیت اتوبوس و بلیت هواپیما چارتری است؛ راهی سریع و
-                آسان برای برنامه ریزی سفرهایتان!</p>
-            <p>تنها با چند کلیک می توانید بلیت خود را به هر مقصدی که بخواهید تهیه کرده، صورتحسابتان را آنلاین پرداخت
-                کنید و بی دغدغه آماده سفر خود باشید!</p>
-            <p>تمام حقوق برای شرکت {{ site_settings.site_name }} محفوظ است.</p>
+            <p>{{ site_settings.description }}</p>
+            <p>تمام حقوق برای شرکت
+                {% if site_settings.site_name %}{{ site_settings.site_name }} {% else %}"نام سایت"{% endif %}
+                محفوظ است.</p>
         </div>
     </div>
 </div>
