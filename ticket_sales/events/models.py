@@ -5,6 +5,7 @@ from core.models import BaseModel
 from django.utils.translation import gettext_lazy as _
 
 from customers.models import Customer
+from django_jalali.db import models as jmodels
 
 
 class Event(BaseModel):
@@ -12,9 +13,14 @@ class Event(BaseModel):
         verbose_name = _('رویداد')
         verbose_name_plural = _('رویداد')
 
-    name = models.CharField(
+    title = models.CharField(
         max_length=250,
-        verbose_name=_('نام'),
+        verbose_name=_('عنوان'),
+    )
+
+    datetime = jmodels.jDateTimeField(
+        verbose_name=_('زمان برگزاری'),
+        null=True,
     )
 
     total_capacity = models.PositiveIntegerField(
