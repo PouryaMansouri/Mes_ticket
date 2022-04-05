@@ -9,26 +9,26 @@ from customers.models import Customer
 
 class Event(BaseModel):
     class Meta:
-        verbose_name = _('Event')
-        verbose_name_plural = _('Events')
+        verbose_name = _('رویداد')
+        verbose_name_plural = _('رویداد')
 
     name = models.CharField(
         max_length=250,
-        verbose_name=_('Event'),
+        verbose_name=_('نام'),
     )
 
     total_capacity = models.PositiveIntegerField(
-        verbose_name=_('Capacity')
+        verbose_name=_('ظرفیت کل')
     )
 
     remaining_capacity = models.PositiveIntegerField(
-        verbose_name=_('Remaining Capacity'),
+        verbose_name=_('ظرفیت باقیمانده'),
         editable=False,
     )
 
     price = models.PositiveIntegerField(
-        verbose_name=_('Price'),
-        help_text=_('Price in Toman!'),
+        verbose_name=_('قیمت'),
+        help_text=_('قیمت به تومان'),
         default=0,
     )
 
@@ -40,31 +40,33 @@ class Event(BaseModel):
 
 class Ticket(BaseModel):
     class Meta:
-        verbose_name = _('Ticket'),
-        verbose_name_plural = _('Tickets')
+        verbose_name = _('بلیت'),
+        verbose_name_plural = _('بلیت')
         unique_together = ('event', 'national_code')
 
     customer = models.ForeignKey(
         Customer,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        verbose_name=_('مشتری'),
     )
 
     full_name = models.CharField(
-        _('full name'),
+        _('نام و نام خانوادگی'),
         max_length=150,
         blank=True
     )
 
     event = models.ForeignKey(
         Event,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        verbose_name=_('رویداد'),
     )
 
     phone = models.CharField(
         max_length=14,
         null=True,
         blank=True,
-        verbose_name=_('Phone'),
+        verbose_name=_('شماره موبایل'),
         validators=[RegexValidator(
             regex='^(0)?9\d{9}$',
             message=_('Please Enter a Valid Phone Number!')
@@ -73,7 +75,7 @@ class Ticket(BaseModel):
 
     national_code = models.CharField(
         max_length=10,
-        verbose_name=_('National Code'),
+        verbose_name=_('کدملی'),
         unique=True,
         validators=[RegexValidator(
             regex="^(?!(\d)\1{9})\d{10}$",
