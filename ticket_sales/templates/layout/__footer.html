@@ -3,8 +3,8 @@
         <div id="top-footer">
             <p style="color: {{ site_settings.footer_text_color }};">با {% if site_settings.site_name %}{{ site_settings.site_name }} {% else %}"نام سایت"{% endif %}
                 در ارتباط باشید!</p>
-            <p style="color: {{ site_settings.footer_text_color }};">{{ site_settings.contact_phone }}</p>
-            <p style="color: {{ site_settings.footer_text_color }};">{{ site_settings.contact_email }}</p>
+            <p><a href="tel:{{ site_settings.contact_phone }}" style="color: {{ site_settings.footer_text_color }};">{{ site_settings.contact_phone }}</a></p>
+            <p><a href="mailto:{{ site_settings.contact_email }}" style="color: {{ site_settings.footer_text_color }};">{{ site_settings.contact_email }}</a></p>
             <div class="clear"></div>
         </div>
         <div id="bottom-footer">
