@@ -39,10 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'colorfield',
+    'django_jalali',
     'rosetta',
     'core',
     'site_settings',
     'customers',
+    'events',
 ]
 
 MIDDLEWARE = [
