@@ -5,4 +5,4 @@ from django.utils.translation import gettext_lazy as _
 class SiteSettingsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'site_settings'
-    verbose_name = _('Site Settings')
+    verbose_name = _('تنظیمات سایت')
