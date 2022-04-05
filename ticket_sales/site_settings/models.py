@@ -48,5 +48,12 @@ class SiteSetting(SingletonBaseModel):
         verbose_name=_('Email Address'),
     )
 
+    description = models.TextField(
+        null=True,
+        blank=True,
+        verbose_name=_('Description'),
+        help_text=_('Write description of site! It will be add in site footer!'),
+    )
+
     def __str__(self):
         return self.site_name
