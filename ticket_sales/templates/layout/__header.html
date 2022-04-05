@@ -1,6 +1,6 @@
 <div id="header">
     <div id="header-container">
-        <h1 style="color:{{ site_settings.site_name_color }};">{{ site_settings.site_name }}</h1>
+        <h1><a href="{% url 'events:index' %}" style="color:{{ site_settings.site_name_color }};" class="border-bottom-0">{{ site_settings.site_name }}</a></h1>
         <div id="nav">
             <ul>
                 <li><a style="color: {{ site_settings.navbar_text_color }}" href="#">خانه</a></li>
