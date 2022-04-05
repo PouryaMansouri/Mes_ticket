@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'rosetta',
     'core',
     'site_settings',
@@ -142,3 +143,14 @@ AUTH_USER_MODEL = 'core.User'
 LOGIN_URL = 'customers:login'
 LOGIN_REDIRECT_URL = 'events:index'
 LOGOUT_REDIRECT_URL = 'events:index'
+
+# REST_FRAMEWORK = {
+    # 'DEFAULT_THROTTLE_CLASSES': [
+    #     'rest_framework.throttling.AnonRateThrottle',
+    #     'rest_framework.throttling.UserRateThrottle'
+    # ],
+    # 'DEFAULT_THROTTLE_RATES': {
+    #     'anon': '1/minute',
+    #     'user': '1/minute',
+    # }
+# }
