@@ -27,8 +27,8 @@
                 <legend>ورود کاربر</legend>
                 <label for="username">موبایل</label>
                 <input id="username" class="p-2" type="text" required name="username" placeholder="09123456789"><br/>
-                <label for="password">کد تایید</label>
-                <input id="password" class="p-2" type="password" required name="password"><br/>
+                <div id="verify-code-input" class="d-none"><label for="password">کد تایید</label>
+                <input id="password" class="p-2" type="password" required name="password"></div><br/>
                 <center>
                     <button id="sms-button" class="btn btn-dark m-auto countdown" type="button"
                             onclick="sms_sender($('#username').val())">ارسال
@@ -53,6 +53,7 @@
                     phone: phone
                 },
                 success: function () {
+                    $('#verify-code-input').removeClass('d-none').fadeOut(0).fadeIn()
                     $('#sms-button').attr('onclick', '')
                     var timer2 = "1:00";
                     var interval = setInterval(function () {
