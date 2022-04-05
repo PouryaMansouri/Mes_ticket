@@ -8,12 +8,12 @@ from django.utils.translation import gettext_lazy as _
 
 class SiteSetting(SingletonBaseModel):
     class Meta:
-        verbose_name = _('Site Setting')
-        verbose_name_plural = _('Site Settings')
+        verbose_name = _('تنظیمات سایت')
+        verbose_name_plural = _('تنظیمات سایت')
 
     site_name = models.CharField(
         max_length=100,
-        verbose_name=_('Site Name'),
+        verbose_name=_('نام سایت'),
     )
 
     bg_image = models.ImageField(
@@ -21,8 +21,8 @@ class SiteSetting(SingletonBaseModel):
         blank=True,
         default='site_settings/bg.jpg',
         upload_to='site_settings',
-        verbose_name=_('Background Image'),
-        help_text=_('Please upload an image with 830 width and 480 height!')
+        verbose_name=_('تصویر پس زمینه'),
+        help_text=_('لطفا تصویری با عرض ۸۳۰ و ارتفاع ۴۸۰ پیکسل بارگذاری نمایید.')
     )
 
     home_banner = models.ImageField(
@@ -30,30 +30,30 @@ class SiteSetting(SingletonBaseModel):
         blank=True,
         default='site_settings/banner.png',
         upload_to='site_settings',
-        verbose_name=_('Home Banner'),
-        help_text=_('Please upload an image with 740 width and 110 height!')
+        verbose_name=_('بنر صفحه اصلی'),
+        help_text=_('لطفا تصویری با عرض ۷۴۰ و ارتفاع ۱۱۰ پیکسل بارگذاری نمایید.')
     )
 
     contact_phone = models.CharField(
         max_length=11,
         unique=True,
-        verbose_name=_('Contact Phone'),
-        help_text=_('This is const phone. write it with pre number!'),
+        verbose_name=_('تلفن ارتباطی'),
+        help_text=_('این شماره تلفن ثابت شماست. لطفا آن را با پیش شماره شهر خود وارد نمایید.'),
         validators=[RegexValidator(
             regex='^0\d{2,3}\d{8}$',
-            message=_('Please Enter a Valid Phone!')
+            message=_('لطفا شماره تلفن معتبری وارد نمایید.')
         )]
     )
 
     contact_email = models.EmailField(
-        verbose_name=_('Email Address'),
+        verbose_name=_('آدرس ایمیل ارتباطی'),
     )
 
     description = models.TextField(
         null=True,
         blank=True,
-        verbose_name=_('Description'),
-        help_text=_('Write description of site! It will be add in site footer!'),
+        verbose_name=_('توضیحات سایت'),
+        help_text=_('این توضیحات در بخش پاورقی وبسایت نمایش داده خواهند شد.'),
     )
 
     site_name_color = ColorField(
