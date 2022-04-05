@@ -1,16 +1,16 @@
 <div id="header">
     <div id="header-container">
-        <h1>{{ site_settings.site_name }}</h1>
+        <h1 style="color:{{ site_settings.site_name_color }};">{{ site_settings.site_name }}</h1>
         <div id="nav">
             <ul>
-                <li><a href="#">خانه</a></li>
-                <li><a href="#">درباره ما</a></li>
-                <li><a href="#">تماس با ما</a></li>
+                <li><a style="color: {{ site_settings.navbar_text_color }}" href="#">خانه</a></li>
+                <li><a style="color: {{ site_settings.navbar_text_color }}" href="#">درباره ما</a></li>
+                <li><a style="color: {{ site_settings.navbar_text_color }}" href="#">تماس با ما</a></li>
                 <li>
                     {% if user.is_authenticated %}
-                        <a href="{% url 'customers:logout' %}">خروج</a>
+                        <a style="color: {{ site_settings.navbar_text_color }}" href="{% url 'customers:logout' %}">خروج</a>
                     {% else %}
-                        <a href="{% url 'customers:login' %}">ورود/ثبت نام</a>
+                        <a style="color: {{ site_settings.navbar_text_color }}" href="{% url 'customers:login' %}">ورود/ثبت نام</a>
                     {% endif %}
                 </li>
             </ul>
