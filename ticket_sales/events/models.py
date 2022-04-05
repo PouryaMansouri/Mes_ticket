@@ -23,6 +23,21 @@ class Event(BaseModel):
         null=True,
     )
 
+    description = models.TextField(
+        null=True,
+        blank=True,
+        verbose_name=_('توضیحات رویداد'),
+    )
+
+    image = models.ImageField(
+        null=True,
+        blank=True,
+        default='events/default.jpg',
+        upload_to='events',
+        verbose_name=_('تصویر رویداد'),
+        help_text=_('لطفا تصویری با عرض y و ارتفاع x پیکسل بارگذاری نمایید.')
+    )
+
     total_capacity = models.PositiveIntegerField(
         verbose_name=_('ظرفیت کل')
     )
