@@ -14,7 +14,7 @@
             integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     {% block extra_head %}{% endblock %}
 </head>
-<body style="background-image: url('{{ site_settings.bg_image.url }}');
+<body style="background-image: url({% if site_settings and site_settings.bg_image %}'{{ site_settings.bg_image.url }}'{% else %}'{% static 'image/bg.jpg' %}'{% endif %});
         background-position-x: initial;
         background-position-y: initial;
         background-size: cover;
