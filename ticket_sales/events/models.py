@@ -58,6 +58,9 @@ class Event(BaseModel):
             self.remaining_capacity = self.total_capacity
         super().save(force_insert, force_update, using, update_fields)
 
+    def __str__(self):
+        return self.title
+
 
 class Ticket(BaseModel):
     class Meta:
