@@ -2,88 +2,57 @@
 {% load static %}
 {% block title %}{{ site_settings.site_name }}{% endblock %}
 {% block content %}
-<div id="search-content">
-    <div id="sidebar">
-        <h2>شرکت های همکار</h2>
-        <div id="co-img">
-            <a href="http://www.iaa.ir/" target="_blank"><img src="{% static 'image/aseman.jpg' %}" alt="aseman"></a>
-            <a href="https://www.alibaba.ir/caspianair" target="_blank"><img src="{% static 'image/Kaspian.jpg' %}"
-                                                                             alt="Kaspian"></a>
-            <a href="https://www.alibaba.ir/iranair" target="_blank"><img src="{% static 'image/iranair.jpg' %}"
-                                                                          alt="iranair"></a>
-            <a href="https://www.kishairlines.ir/" target="_blank"><img src="{% static 'image/kish.jpg' %}" alt="kish"></a>
-            <a href="https://www.mahan.aero/Pages/index.html" target="_blank"><img src="{% static 'image/mahan.jpg' %}"
-                                                                                   alt="mahan"></a>
-            <a href="https://www.zagrosairlines.com/" target="_blank"><img src="{% static 'image/Zaghros.jpg' %}"
-                                                                           alt="Zaghros"></a>
+    <div class="col-10 mt-5 p-3 mx-auto" style="background-color: rgba(1, 1, 1, 0.5);">
+        <img class="w-100 h-100" src="{% if site_settings and site_settings.home_banner %}{{ site_settings.home_banner.url }}{% else %}{% static 'image/banner.jpg' %}{% endif %}" alt="بنر">
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            {% for event in events %}
+                <div class="col-4 m-5 p-3" style="background-color: rgba(1, 1, 1, 0.5);">
+                    <h2 class="text-center text-white">{{ event.title }}</h2>
+                    <div class="mb-3">
+                        <img class="w-100 h-100 rounded"
+                             src="{{ event.image.url }}"
+                             alt="{{ event.title }}">
+                    </div>
+                    <p class="text-white text-center">{{ event.datetime.date }}</p>
+                    <p class="text-white text-center">{{ event.datetime.time }}</p>
+                    {% if event.remaining_capacity <= 50 %}
+                        <p class="text-white text-center bg-danger rounded">ظرفیت
+                            باقیمانده:{{ event.remaining_capacity }}</p>
+                    {% endif %}
+                    <p class="text-white text-center">{% if event.price == 0 %}رایگان{% else %}{{ event.price }}تومان
+                    {% endif %} </p>
+                    <p class="text-white m-1">{{ event.description }}</p>
+                    <center>
+                        <button type="button" class="btn btn-success" data-toggle="modal"
+                                data-target="#eventticketmodal{{ event.id }}">خرید بلیت
+                        </button>
+                    </center>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="#eventticketmodal{{ event.id }}" tabindex="-1" role="dialog"
+                     aria-labelledby="#eventticketmodal{{ event.id }}Title" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ...
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
-    <div id="content">
-        <img id="baner" src="{{ site_settings.home_banner.url }}" alt="خرید بلیت">
-        <div class="ticket">
-            <img class="co-logo" src="{% static 'image/Kaspian.jpg' %}" alt=""/>
-            <h3>تهران 15:30</h3>
-            <img class="arrow" src="{% static 'image/left-arrow.png' %}" alt=""/>
-            <h3>مشهد 16:40</h3>
-            <h3>500000ریال</h3>
-            <button>انتخاب بلیت</button>
-            <div class="clear"></div>
-        </div>
-        <div class="ticket">
-            <img class="co-logo" src="{% static 'image/aseman.jpg' %}" alt=""/>
-            <h3>تهران 15:30</h3>
-            <img class="arrow" src="{% static 'image/left-arrow.png' %}" alt=""/>
-            <h3>مشهد 16:40</h3>
-            <h3>500000ریال</h3>
-            <button>انتخاب بلیت</button>
-            <div class="clear"></div>
-        </div>
-        <div class="ticket">
-            <img class="co-logo" src="{% static 'image/mahan.jpg' %}" alt=""/>
-            <h3>تهران 15:30</h3>
-            <img class="arrow" src="{% static 'image/left-arrow.png' %}" alt=""/>
-            <h3>مشهد 16:40</h3>
-            <h3>500000ریال</h3>
-            <button>انتخاب بلیت</button>
-            <div class="clear"></div>
-        </div>
-        <div class="ticket">
-            <img class="co-logo" src="{% static 'image/iranair.jpg' %}" alt=""/>
-            <h3>تهران 15:30</h3>
-            <img class="arrow" src="{% static 'image/left-arrow.png' %}" alt=""/>
-            <h3>مشهد 16:40</h3>
-            <h3>500000ریال</h3>
-            <button>انتخاب بلیت</button>
-            <div class="clear"></div>
-        </div>
-        <div class="ticket">
-            <img class="co-logo" src="{% static 'image/kish.jpg' %}" alt=""/>
-            <h3>تهران 15:30</h3>
-            <img class="arrow" src="{% static 'image/left-arrow.png' %}" alt=""/>
-            <h3>مشهد 16:40</h3>
-            <h3>500000ریال</h3>
-            <button>انتخاب بلیت</button>
-            <div class="clear"></div>
-        </div>
-        <div class="ticket">
-            <img class="co-logo" src="{% static 'image/Zaghros.jpg' %}" alt=""/>
-            <h3>تهران 15:30</h3>
-            <img class="arrow" src="{% static 'image/left-arrow.png' %}" alt=""/>
-            <h3>مشهد 16:40</h3>
-            <h3>500000ریال</h3>
-            <button>انتخاب بلیت</button>
-            <div class="clear"></div>
-        </div>
-        <div class="ticket">
-            <img class="co-logo" src="{% static 'image/Kaspian.jpg' %}" alt=""/>
-            <h3>تهران 15:30</h3>
-            <img class="arrow" src="{% static 'image/left-arrow.png' %}" alt=""/>
-            <h3>مشهد 16:40</h3>
-            <h3>500000ریال</h3>
-            <button>انتخاب بلیت</button>
-            <div class="clear"></div>
-        </div>
-    </div>
-</div>
-<div class="clear"></div>
+    <div class="clear"></div>
 {% endblock %}
