@@ -1,21 +1,23 @@
 from kavenegar import KavenegarAPI, APIException, HTTPException
 
+from site_settings.models import SiteSetting
+
 
 def send_otp_code(phone, code):
-    try:
-        api = KavenegarAPI(
-            '63692F4778315056363552346E79796C55624C765973447649314859516156705A706557763430634D48513D')
-        params = {
-            'sender': '10008663',
-            'receptor': f'{phone}',
-            'message': f'خوش آمدید!\n کد تایید شما: {code}',
-        }
-        print(code)
-        # response = api.sms_send(params)
-        # print(response)
-    except APIException as e:
-        print(e)
-    except HTTPException as e:
-        print(e)
-
-
+    site_setting = SiteSetting.load()
+    if site_setting:
+        try:
+            api = KavenegarAPI(site_setting.kavenegar_api_key)
+            params = {
+                'sender': site_setting.kavenegar_sender,
+                'receptor': f'{phone}',
+                'message': f'{site_setting.kavenegar_message}\n کد تایید شما: {code}',
+            }
+            print(code)
+            # response = api.sms_send(params)
+            # todo: uncomment upper line
+            # print(response)
+        except APIException as e:
+            print(e)
+        except HTTPException as e:
+            print(e)
