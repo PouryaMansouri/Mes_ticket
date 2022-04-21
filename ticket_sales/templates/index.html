@@ -3,7 +3,9 @@
 {% block title %}{{ site_settings.site_name }}{% endblock %}
 {% block content %}
     <div class="col-10 mt-5 p-3 mx-auto" style="background-color: rgba(1, 1, 1, 0.5);">
-        <img class="w-100 h-100" src="{% if site_settings and site_settings.home_banner %}{{ site_settings.home_banner.url }}{% else %}{% static 'image/banner.jpg' %}{% endif %}" alt="بنر">
+        <img class="w-100 h-100" src="
+                {% if site_settings and site_settings.home_banner %}{{ site_settings.home_banner.url }}{% else %}{% static 'image/banner.jpg' %}{% endif %}"
+             alt="بنر">
     </div>
     <div class="container">
         <div class="row justify-content-center">
@@ -25,19 +27,20 @@
                     {% endif %} </p>
                     <p class="text-white m-1">{{ event.description }}</p>
                     <center>
-                        <button type="button" class="btn btn-success" data-toggle="modal"
-                                data-target="#eventticketmodal{{ event.id }}">خرید بلیت
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                data-bs-target="#eventticketmodal{{ event.id }}">خرید بلیت
                         </button>
                     </center>
                 </div>
                 <!-- Modal -->
-                <div class="modal fade" id="#eventticketmodal{{ event.id }}" tabindex="-1" role="dialog"
-                     aria-labelledby="#eventticketmodal{{ event.id }}Title" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal fade" id="eventticketmodal{{ event.id }}" tabindex="-1"
+                     aria-labelledby="exampleModalLabel{{ event.id }}"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <h5 class="modal-title text-primary">خرید بلیت</h5>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
@@ -45,8 +48,8 @@
                                 ...
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+                                <button type="button" class="btn btn-success">خرید</button>
                             </div>
                         </div>
                     </div>
