@@ -27,35 +27,74 @@
                     {% endif %} </p>
                     <p class="text-white m-1">{{ event.description }}</p>
                     <center>
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                data-bs-target="#eventticketmodal{{ event.id }}">خرید بلیت
-                        </button>
+                        {% if request.user.is_authenticated %}
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#eventticketmodal{{ event.id }}">خرید بلیت
+                            </button>
+                        {% else %}
+                            <a href="{% url 'customers:login' %}">
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                        data-bs-target="#eventticketmodal{{ event.id }}">خرید بلیت
+                                </button>
+                            </a>
+                        {% endif %}
                     </center>
                 </div>
                 <!-- Modal -->
                 <div class="modal fade" id="eventticketmodal{{ event.id }}" tabindex="-1"
                      aria-labelledby="exampleModalLabel{{ event.id }}"
                      aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title text-primary">خرید بلیت</h5>
-                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                ...
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
-                                <button type="button" class="btn btn-success">خرید</button>
+                    <form id="form-container" method="POST">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-primary">خرید بلیت</h5>
+                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body" id="form-container{{ event.id }}">
+                                    {% csrf_token %}
+                                    {{ ticket_forms.management_form }}
+                                    {% for form in ticket_forms %}
+                                        <div class="ticket-form{{ event.id }} border-bottom border-dark mb-3">
+                                            {{ form.as_p }}
+                                            <input type="hidden" name="event" value="{{ event.id }}">
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن
+                                    </button>
+                                    <button id="add-form" onclick="addForm('{{ event.id }}')" type="button" class="btn btn-primary">افزودن بلیت</button>
+                                    <button type="submit" class="btn btn-success">خرید</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             {% endfor %}
         </div>
     </div>
     <div class="clear"></div>
+{% endblock %}
+{% block extra_scripts %}
+    <script>
+
+        function addForm(event_id) {
+            let ticketForm = document.querySelectorAll(`.ticket-form${event_id}`)
+            let totalForms = document.querySelector("#id_form-TOTAL_FORMS")
+
+            let formNum = ticketForm.length - 1
+
+            let newForm = ticketForm[0].cloneNode(true)
+            let formRegex = RegExp(`form-(\\d){1}-`, 'g')
+
+            formNum++
+            newForm.innerHTML = newForm.innerHTML.replace(formRegex, `form-${formNum}-`)
+            $(`#form-container${event_id}`).append(newForm).hide().fadeIn()
+
+            totalForms.setAttribute('value', `${formNum + 1}`)
+        }
+    </script>
 {% endblock %}
