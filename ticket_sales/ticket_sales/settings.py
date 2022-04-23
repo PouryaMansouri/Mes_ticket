@@ -113,7 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'fa'
 
 LANGUAGES = (
-    ('en', 'english'),
+    ('en', 'English'),
     ('fa', 'Farsi'),
 )
 
