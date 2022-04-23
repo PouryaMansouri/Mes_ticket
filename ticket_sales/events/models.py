@@ -79,7 +79,6 @@ class Ticket(BaseModel):
         blank=True
     )
 
-
     event = models.ForeignKey(
         Event,
         on_delete=models.CASCADE,
@@ -132,3 +131,4 @@ class Team(BaseModel):
         verbose_name=_('لوگو'),
         help_text=_('لطفا تصویری با عرض y و ارتفاع x پیکسل بارگذاری نمایید.')
     )
+
