@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'colorfield',
+    'site_settings',
     'django_jalali',
     'rosetta',
     'core',
