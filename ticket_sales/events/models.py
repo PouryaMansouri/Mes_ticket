@@ -79,6 +79,7 @@ class Ticket(BaseModel):
         blank=True
     )
 
+
     event = models.ForeignKey(
         Event,
         on_delete=models.CASCADE,
