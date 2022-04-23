@@ -7,14 +7,43 @@ from django.utils.translation import gettext_lazy as _
 from django_jalali.db import models as jmodels
 
 
+class Team(BaseModel):
+    class Meta:
+        verbose_name = _('تیم')
+        verbose_name_plural = _('تیم')
+
+    name = models.CharField(
+        max_length=150,
+        verbose_name=_('نام تیم')
+    )
+
+    logo = models.ImageField(
+        null=True,
+        blank=True,
+        # default='events/default.jpg',
+        upload_to='events/teams',
+        verbose_name=_('لوگو'),
+        help_text=_('لطفا تصویری با عرض y و ارتفاع x پیکسل بارگذاری نمایید.')
+    )
+
+
 class Event(BaseModel):
     class Meta:
         verbose_name = _('رویداد')
         verbose_name_plural = _('رویداد')
 
-    title = models.CharField(
-        max_length=250,
-        verbose_name=_('عنوان'),
+    home_team = models.ForeignKey(
+        Team,
+        on_delete=models.PROTECT,
+        verbose_name=_('تیم میزبان'),
+        related_name='home_team_set'
+    )
+
+    away_team = models.ForeignKey(
+        Team,
+        on_delete=models.PROTECT,
+        verbose_name=_('تیم مهمان'),
+        related_name='away_team_set'
     )
 
     datetime = jmodels.jDateTimeField(
@@ -55,7 +84,8 @@ class Event(BaseModel):
     is_available = models.BooleanField(
         default=True,
         verbose_name=_('قابل استفاده بودن'),
-        help_text=_('زمانی که ظرفیت رویداد به پایان برسد یا ادمین سایت این گزینه را لغو کند، امکان خرید بلیط برای این رویداد غیرفعال خواهد شد.')
+        help_text=_(
+            'زمانی که ظرفیت رویداد به پایان برسد یا ادمین سایت این گزینه را لغو کند، امکان خرید بلیط برای این رویداد غیرفعال خواهد شد.')
     )
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
@@ -64,7 +94,7 @@ class Event(BaseModel):
         super().save(force_insert, force_update, using, update_fields)
 
     def __str__(self):
-        return self.title
+        return f'{self.home_team.name} | {self.away_team.name}'
 
 
 class Ticket(BaseModel):
@@ -78,6 +108,12 @@ class Ticket(BaseModel):
         max_length=150,
         blank=True
     )
+
+    # birth_datetime = jmodels.jDateTimeField(
+    #     verbose_name=_('تاریخ تولد'),
+    #     null=True,
+    #     blank=True,
+    # )
 
     event = models.ForeignKey(
         Event,
@@ -112,23 +148,8 @@ class Ticket(BaseModel):
         help_text=_('زمانی که بلیط تحویل ورزشگاه شد، این فیلد باید توسط ادمین تغییر کند.')
     )
 
-
-class Team(BaseModel):
-    class Meta:
-        verbose_name = _('تیم')
-        verbose_name_plural = _('تیم')
-
-    name = models.CharField(
-        max_length=150,
-        verbose_name=_('نام تیم')
-    )
-
-    logo = models.ImageField(
-        null=True,
-        blank=True,
-        # default='events/default.jpg',
-        upload_to='events/teams',
-        verbose_name=_('لوگو'),
-        help_text=_('لطفا تصویری با عرض y و ارتفاع x پیکسل بارگذاری نمایید.')
-    )
-
+    def event_capacity_reducer(self):
+        self.event.remaining_capacity -= 1
+        if self.event.remaining_capacity == 0:
+            self.event.is_available = False
+        self.event.save()

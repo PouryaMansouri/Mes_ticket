@@ -1,5 +1,5 @@
 from core.admin import BaseAdmin
-from events.models import Event
+from events.models import Event, Team
 from django.contrib import admin
 
 from django_jalali.admin.filters import JDateFieldListFilter
@@ -15,3 +15,4 @@ class EventAdmin(BaseAdmin):
 
 
 admin.site.register(Event, EventAdmin)
+admin.site.register(Team)
