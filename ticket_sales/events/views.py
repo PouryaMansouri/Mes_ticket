@@ -2,7 +2,6 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
-from customers.models import Customer
 from events.forms import TicketFormSet, TicketForm
 from events.models import Event, Ticket
 
@@ -31,7 +30,6 @@ class Index(CreateView):
             return self.form_valid(formset)
 
     def form_valid(self, formset):
-        customer = Customer.objects.get(user=self.request.user)
         tickets = formset.save(commit=False)
         for ticket in tickets:
             ticket.customer = customer

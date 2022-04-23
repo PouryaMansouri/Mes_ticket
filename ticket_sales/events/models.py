@@ -4,7 +4,6 @@ from django.db import models
 from core.models import BaseModel
 from django.utils.translation import gettext_lazy as _
 
-from customers.models import Customer
 from django_jalali.db import models as jmodels
 
 
@@ -53,6 +52,12 @@ class Event(BaseModel):
         default=0,
     )
 
+    is_available = models.BooleanField(
+        default=True,
+        verbose_name=_('قابل استفاده بودن'),
+        help_text=_('زمانی که ظرفیت رویداد به پایان برسد یا ادمین سایت این گزینه را لغو کند، امکان خرید بلیط برای این رویداد غیرفعال خواهد شد.')
+    )
+
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         if not self.pk:
             self.remaining_capacity = self.total_capacity
@@ -64,15 +69,9 @@ class Event(BaseModel):
 
 class Ticket(BaseModel):
     class Meta:
-        verbose_name = _('بلیت'),
-        verbose_name_plural = _('بلیت')
+        verbose_name = _('بلیط'),
+        verbose_name_plural = _('بلیط')
         unique_together = ('event', 'national_code')
-
-    customer = models.ForeignKey(
-        Customer,
-        on_delete=models.CASCADE,
-        verbose_name=_('مشتری'),
-    )
 
     full_name = models.CharField(
         _('نام و نام خانوادگی'),
@@ -105,4 +104,30 @@ class Ticket(BaseModel):
             regex="^(?!(\d)\1{9})\d{10}$",
             message=_('National code isn\'t valid!')
         )]
+    )
+
+    is_used = models.BooleanField(
+        default=False,
+        verbose_name=_('استفاده شده'),
+        help_text=_('زمانی که بلیط تحویل ورزشگاه شد، این فیلد باید توسط ادمین تغییر کند.')
+    )
+
+
+class Team(BaseModel):
+    class Meta:
+        verbose_name = _('تیم')
+        verbose_name_plural = _('تیم')
+
+    name = models.CharField(
+        max_length=150,
+        verbose_name=_('نام تیم')
+    )
+
+    logo = models.ImageField(
+        null=True,
+        blank=True,
+        # default='events/default.jpg',
+        upload_to='events/teams',
+        verbose_name=_('لوگو'),
+        help_text=_('لطفا تصویری با عرض y و ارتفاع x پیکسل بارگذاری نمایید.')
     )

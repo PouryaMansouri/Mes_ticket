@@ -1,0 +1,26 @@
+.donate-wrap { margin: 90px 0 90px 0 !important; position: relative; text-align: center; background: url(../images/donate-bg.jpg); background-size: cover;}
+
+.donate-wrap h3 { padding-bottom: 17px; font-size: 38px; text-transform: uppercase; color:#fff;}
+.donate-wrap h3 span { color: #ffc722;}
+.donate-wrap .intro-text { font-size: 15px; line-height: 22px; color:#fff; font-family: 'Work Sans', sans-serif;}
+.donate-inner { padding: 55px 0 50px 0; position: relative;}
+.donate-inner:before { content: ''; width: 25%; position: absolute; top: 70px; bottom:70px; left: 70px; border: solid #ffc722; border-width: 1px 0 1px 1px;}
+.donate-inner:after { content: ''; width: 25%; position: absolute; top: 70px; bottom:70px; right: 70px; border: solid #ffc722; border-width: 1px 1px 1px 0;}
+.teamdonate-form { margin-bottom: 0;}
+.teamdonate-form label { display: inline-block; color:#fff; font-size: 15px; font-family: 'Work Sans', sans-serif;}
+.teamdonate-form label:hover { color:#ffc722;}
+.teamdonate-form .radio-wrap { margin-top: 34px; margin-bottom: 20px; width: 370px; font-size: 0; height: 41px; position: relative; display: inline-block;}
+.teamdonate-form .radio-wrap:before { content:''; border-radius: 2px 2px 0 0; height: 3px; background: #fff; left: 0; right: 0; top: 10px; position: absolute;}
+.teamdonate-form .radio-wrap label { padding-top: 23px; box-sizing: border-box; vertical-align: bottom; width: 16.666666%; height: 100%; position: relative;}
+.teamdonate-form .radio-wrap label input { position: absolute; opacity:0;}
+.teamdonate-form .radio-wrap label:before { content:''; margin-left: -5px; opacity: 0; position: absolute; width: 10px; height: 0; background: #ffc722; top: 0; left: 50%; transition: all 300ms; -webkit-transition: all 30ms;}
+.teamdonate-form .radio-wrap label:after { content:''; margin-left: -9px;  width: 10px; height: 0; position: absolute; top: 0; left: 50%; background: #ffc722; opacity:0; -webkit-transform: skew(-33deg); transform: skew(-33deg); transition: all 300ms; -webkit-transition: all 300ms;}
+.teamdonate-form .radio-wrap label.active { color: #ffc722;}
+.teamdonate-form .radio-wrap label.active:before { opacity: 1; height: 13px;}
+.teamdonate-form .radio-wrap label.active:after { opacity: 1; height: 13px;}
+
+.donate-btn { padding: 0 50px; background: #ffc722; position: relative; font-family: 'Work Sans', sans-serif; display: inline-block; line-height: 38px; font-size: 12px; font-weight: bold; color:#363533; text-transform: uppercase; transition:400ms all; -webkit-transition:400ms all ; border:none;}
+.donate-btn:hover { text-decoration: none; background: #363533; color:#ffc722;}
+.donate-btn:before {content: ''; position: absolute; top: -3px; right:-3px; bottom:-3px; left:-3px; border: 1px solid #ffc722;}
+.donate-btn span { display: block; position: relative;}
+.donate-btn:hover span { color:#fff;}

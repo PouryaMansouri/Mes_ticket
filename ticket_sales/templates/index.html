@@ -1,100 +1,515 @@
-{% extends 'layout/_base.html' %}
 {% load static %}
-{% block title %}{{ site_settings.site_name }}{% endblock %}
-{% block content %}
-    <div class="col-10 mt-5 p-3 mx-auto" style="background-color: rgba(1, 1, 1, 0.5);">
-        <img class="w-100 h-100" src="
-                {% if site_settings and site_settings.home_banner %}{{ site_settings.home_banner.url }}{% else %}{% static 'image/banner.jpg' %}{% endif %}"
-             alt="بنر">
+<!DOCTYPE html>
+<html lang="en-gb">
+
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>رزرو بلیط آنلان</title>
+    <link href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
+    <link href="{% static 'images/favicon.ico' %}" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="{% static 'css/akslider.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/donate.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/theme.css' %}" rel="stylesheet" type="text/css" />
+    <script type='text/javascript' src='../../ajax.googleapis.com/ajax/libs/mootools/1.3.1/mootools-yui-compressed.js'></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
+</head>
+
+<body  class="tm-isblog">
+
+    <div class="preloader">
+        <div class="loader"></div>
     </div>
-    <div class="container">
-        <div class="row justify-content-center">
-            {% for event in events %}
-                <div class="col-4 m-5 p-3" style="background-color: rgba(1, 1, 1, 0.5);">
-                    <h2 class="text-center text-white">{{ event.title }}</h2>
-                    <div class="mb-3">
-                        <img class="w-100 h-100 rounded"
-                             src="{{ event.image.url }}"
-                             alt="{{ event.title }}">
-                    </div>
-                    <p class="text-white text-center">{{ event.datetime.date }}</p>
-                    <p class="text-white text-center">{{ event.datetime.time }}</p>
-                    {% if event.remaining_capacity <= 50 %}
-                        <p class="text-white text-center bg-danger rounded">ظرفیت
-                            باقیمانده:{{ event.remaining_capacity }}</p>
-                    {% endif %}
-                    <p class="text-white text-center">{% if event.price == 0 %}رایگان{% else %}{{ event.price }}تومان
-                    {% endif %} </p>
-                    <p class="text-white m-1">{{ event.description }}</p>
-                    <center>
-                        {% if request.user.is_authenticated %}
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                    data-bs-target="#eventticketmodal{{ event.id }}">خرید بلیت
-                            </button>
-                        {% else %}
-                            <a href="{% url 'customers:login' %}">
-                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                        data-bs-target="#eventticketmodal{{ event.id }}">خرید بلیت
-                                </button>
-                            </a>
-                        {% endif %}
-                    </center>
+
+
+    <div class="over-wrap">
+        <div class="toolbar-wrap">
+            <div class="uk-container uk-container-center">
+                <div class="tm-toolbar uk-clearfix uk-hidden-small">
+
+
+                   
+
                 </div>
-                <!-- Modal -->
-                <div class="modal fade" id="eventticketmodal{{ event.id }}" tabindex="-1"
-                     aria-labelledby="exampleModalLabel{{ event.id }}"
-                     aria-hidden="true">
-                    <form id="form-container" method="POST">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title text-primary">خرید بلیت</h5>
-                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body" id="form-container{{ event.id }}">
-                                    {% csrf_token %}
-                                    {{ ticket_forms.management_form }}
-                                    {% for form in ticket_forms %}
-                                        <div class="ticket-form{{ event.id }} border-bottom border-dark mb-3">
-                                            {{ form.as_p }}
-                                            <input type="hidden" name="event" value="{{ event.id }}">
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن
-                                    </button>
-                                    <button id="add-form" onclick="addForm('{{ event.id }}')" type="button" class="btn btn-primary">افزودن بلیت</button>
-                                    <button type="submit" class="btn btn-success">خرید</button>
+            </div>
+        </div>
+
+        <div class="tm-menu-box">
+
+            <div style="height: 70px;" class="uk-sticky-placeholder">
+                <nav style="margin: 0;" class="tm-navbar uk-navbar" data-uk-sticky="">
+                    <div class="uk-container uk-container-center">
+                        <a class="tm-logo uk-float-left" href="index.html">
+                            <img src="{% static 'images/logo-img.png' %}" alt="logo" title="logo"> <span>BelitMes<em>.com</em></span>
+                        </a>
+
+                        <ul style="direction: rtl;" class="uk-navbar-nav uk-hidden-small">
+                            <li style="float: right;"> <a href="#">خانه</a>
+                                <li style="float: right;" ><a href="#">اخبار</a>
+
+                            <li style="float: right;" data-uk-dropdown="{'preventflip':'y'}" aria-haspopup="true" aria-expanded="false"><a href="#">در باره ما</a></li>
+                            <li style="float: right;" class="uk-parent" data-uk-dropdown="{'preventflip':'y'}" aria-haspopup="true" aria-expanded="false"><a href="#">خرید بلیط</a>
+                            </li>
+                            <li style="float: right;" class="uk-parent" data-uk-dropdown="{'preventflip':'y'}" aria-haspopup="true" aria-expanded="false"><a href="#">تماس با ما</a>
+                            
+                            </li>
+                    
+                        
+                        </ul>
+                        <a href="#offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas=""></a>
+                    </div>
+                </nav>
+            </div>
+
+        </div>
+
+        <div class="tm-top-a-box tm-full-width  ">
+            <div class="uk-container uk-container-center">
+                <section id="tm-top-a" class="tm-top-a uk-grid uk-grid-collapse" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin="">
+
+                    <div class="uk-width-1-1">
+                        <div class="uk-panel">
+                            <div class="akslider-module ">
+                                <div class="uk-slidenav-position" data-uk-slideshow="{height: 'auto', animation: 'swipe', duration: '500', autoplay: false, autoplayInterval: '7000', videoautoplay: true, videomute: true, kenburns: false}">
+                                    <ul class="uk-slideshow uk-overlay-active">
+                                        <li aria-hidden="false" class="uk-height-viewport uk-active">
+                                            <div style="background-image: url('/static/images/main-slider-img.jpg');" class="uk-cover-background uk-position-cover"></div><img style="width: 100%; height: auto; opacity: 0;" class="uk-invisible" src="{% static 'images/main-slider-img.jpg' %}" alt="">
+                                            <div class="uk-position-cover uk-flex-middle">
+                                                <div class="uk-container uk-container-center uk-position-cover">
+                                                    <div class="va-promo-text uk-width-6-10 uk-push-4-10">
+                                                        <h3 style="font-family: b yekan;">به رزرو بلیط  <br> <span> باشگاه مس کرمان </span>خوش آمدید</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        
+                                    </ul>
+                                    
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </div>
-            {% endfor %}
+                    </div>
+                </section>
+            </div>
         </div>
-    </div>
-    <div class="clear"></div>
-{% endblock %}
-{% block extra_scripts %}
-    <script>
 
-        function addForm(event_id) {
-            let ticketForm = document.querySelectorAll(`.ticket-form${event_id}`)
-            let totalForms = document.querySelector("#id_form-TOTAL_FORMS")
 
-            let formNum = ticketForm.length - 1
+        <div style="font-family: b yekan;" class="tm-top-b-box tm-full-width  ">
+            <div class="uk-container uk-container-center">
+                <section id="tm-top-b" class="tm-top-b uk-grid" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin="">
 
-            let newForm = ticketForm[0].cloneNode(true)
-            let formRegex = RegExp(`form-(\\d){1}-`, 'g')
+                    <div  class="uk-width-1-1">
+                        <div class="uk-panel">
 
-            formNum++
-            newForm.innerHTML = newForm.innerHTML.replace(formRegex, `form-${formNum}-`)
-            $(`#form-container${event_id}`).append(newForm).hide().fadeIn()
+                            <div class="va-latest-wrap">
+                                <div class="uk-container uk-container-center">
+                                    <div class="va-latest-top">
+                                        <h3 style="font-family: b yekan;">آخرین <span>بازی</span></h3>
+                                        <div class="tournament">
+                                            <address style="font-family: b yekan;">ورزشگاه شهید باهنر کرمان<br><br></address> </div>
+                                        <div class="date">
+                                            پنجم اردیبهشت ماه  | 21:00  </div>
+                                    </div>
+                                </div>
+                                <div style="direction:rtl;" class="va-latest-middle uk-flex uk-flex-middle">
+                                    <div class="uk-container uk-container-center">
+                                        <div class="uk-grid uk-flex uk-flex-middle">
+                                            <div class="uk-width-2-12 center">
+                                                <a href="#">
+                                                    <img src="{% static 'images/club-logo.png' %}" class="img-polaroid" alt="" title="">
+                                                </a>
+                                            </div>
+                                            <div class="uk-width-3-12 name uk-vertical-align">
+                                                <div class="wrap uk-vertical-align-middle">
+                                                    مس کرمان </div>
+                                            </div>
+                                            <div class="uk-width-2-12 score">
+                                                <div class="title">نتیجه</div>
+                                                <div class="table">
+                                                    <div class="left"> ؟</div>
+                                                    <div class="right"> ؟</div>
+                                                    <div class="uk-clearfix"></div>
+                                                </div>
+                                            </div>
+                                            <div class="uk-width-3-12 name alt uk-vertical-align">
+                                                <div class="wrap uk-vertical-align-middle">
+                                                  ملوان بندر انزلی   </div>
+                                            </div>
+                                            <div class="uk-width-2-12 center">
+                                                <a href="#">
+                                                   <img src="{% static 'images/club-logo1.png' %}" class="img-polaroid" alt="" title="">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="uk-container uk-container-center">
+                                    <div class="va-latest-bottom">
+                                        <div class="uk-grid">
+                                            <div class="uk-width-8-12 uk-container-center text">
+                                                <p style="font-family: b yekan; color: black;"> فروش بلیط این بازی فقط به صورت الکترونیکی و از طریق سایت امکان پذیر خواهد بود. در ضمن همراه داشتن گواهی واکسن نیز الزامی می باشد</p>
+                                            </div>
+                                        </div>
 
-            totalForms.setAttribute('value', `${formNum + 1}`)
-        }
-    </script>
-{% endblock %}
+                                        <div class="uk-grid">
+                                            <div class="uk-width-1-1">
+                                                <div class="btn-wrap uk-container-center">
+                                                    <a style="font-family: b yekan;" class="read-more" href="#">رزرو بلیط</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+
+        <div class="tm-top-c-box tm-full-width  home-about">
+            <div class="uk-container uk-container-center">
+                <section id="tm-top-c" class="tm-top-c uk-grid uk-grid-collapse" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin="">
+
+                    <div class="uk-width-1-1 uk-width-large-1-2">
+                        <div class="uk-panel">
+                            <div class="va-about-wrap clearfix uk-cover-background uk-position-relative">
+                                <div class="va-about-text">
+                                    <div style="font-family: b yekan; direction:rtl;" class="title">باشگاه فرهنگی ورزشی <span>مس کرمان</span>
+                                    </div>
+                                    <p style="font-family: b yekan; direction:rtl;">باشگاه فرهنگی ورزشی صنعت مس نه تنها نماد ورزش استان کرمان و صنعت مس کشور که بیشتر نماد فرهنگ این هر دو است. کرمان پهناورترین استان ایران و تاریخی‌ترین فرهنگ زنده‌ی یک پارچه‌ی موجود در فلات ایران است. کرمان زادگاه فلزکاری بشری است، کرمان پایتخت تاریخ جهان است و:
+
+<br></p>
+<p style="font-family: b yekan; direction:rtl;text-align: center;">
+                                        هرچند که از روی کریمان خجلیم 
+                                        <br>
+
+                                        شک نیست که پرورده‌ی این آب و گلیم 
+                                        <br>
+                                        در روی زمین نیست چو کرمان جایی 
+                                        <br>
+                                        کرمان دل عالم است و ما اهل دلیم </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-width-1-1 uk-width-large-1-2">
+                        <div style="min-height: 497px;" class="uk-panel">
+                            <div class="trainers-module tm-trainers-slider ">
+                                <div class="trainer-wrapper">
+                                    <div data-uk-slideset="{default: 1, animation: 'fade', duration: 400}">
+                                        <div class="trainer-top">
+                                          
+                                            <h3 style="font-family: b yekan;">سرمربی </h3>
+                                        </div>
+                                        <ul class="uk-grid uk-slideset uk-grid-width-1-1">
+                                            <li class="uk-active" style="">
+                                                <div class="img-wrap"><img src="{% static 'images/trainer-slider/trainer-img.jpg' %}" alt="">
+                                                </div>
+                                                <div style="font-family: b yekan;" class="name">فرزاد <span>حسینخوانی</span>
+                                                </div>
+                                            </li>
+                                           
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+
+        
+
+
+        
+
+        <div class="tm-top-f-box tm-full-width  va-main-our-news">
+            <div class="uk-container uk-container-center">
+                <section id="tm-top-f" class="tm-top-f uk-grid" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin="">
+                    <div class="uk-width-1-1">
+                        <div class="uk-panel">
+                            <div class="uk-container uk-container-center">
+                                <div class="uk-grid uk-grid-collapse" data-uk-grid-match="">
+                                    <div class="uk-width-1-1">
+                                        <div style="font-family: b yekan;" class="our-news-title">
+                                            <h3 style="font-family: b yekan;" >اخبار <span>وبسایت</span></h3>
+                                        </div>
+                                        <div style="font-family: b yekan;" class="our-news-text">آخرین اخبار باشگاه فرهنگی ورزشی مس در رابطه با بلیط فروشی را از این سایت می توانید دنبال کنید . </div>
+                                    </div>
+
+                                    <article class="uk-width-large-1-2 uk-width-medium-1-1 uk-width-small-1-1 our-news-article" data-uk-grid-match="">
+                                        <div class="img-wrap uk-cover-background uk-position-relative" style="background-image: url('/static/images/534579b3c373c09398691a46025fe5e6.jpg'); min-height: 280px;">
+
+
+                                            <a href="#"></a>
+                                            <img class="uk-invisible" src="{% static 'images/534579b3c373c09398691a46025fe5e6.jpg' %}" alt="">
+
+                                        </div>
+                                        <div style="min-height: 280px; color: black;font-family: b yekan;" class="info">
+                                            
+                                            <div class="name">
+                                                <h4>
+                                                    <a style="font-family: b yekan; color: black;" href="#">  بازی مس و ملوان با 7500 تماشاگر  </a>		
+                                                </h4>
+                                                <br>
+                                            </div>
+                                            <div class="text">
+                                                <p style="font-family: b yekan; color: black;"> از اول اردیبهشت ماه 1401 تمامی بلیط های باشگاه مس کرمان از طریق وبسایت بلیط مس فروش خواهد رفت</p>
+                                                <div class="read-more"><a href="#">بیشتر بخوانید</a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </article>
+
+
+                                    <article class="uk-width-large-1-2 uk-width-medium-1-1 uk-width-small-1-1 our-news-article" data-uk-grid-match="">
+                                        <div class="img-wrap uk-cover-background uk-position-relative" style="background-image: url('/static/images/534579b3c373c09398691a46025fe5e6.jpg'); min-height: 280px;">
+
+
+                                            <a href="#"></a>
+                                            <img class="uk-invisible" src="{% static 'images/534579b3c373c09398691a46025fe5e6.jpg' %}" alt="">
+
+                                        </div>
+                                        <div style="min-height: 280px; color: black;font-family: b yekan;" class="info">
+                                            
+                                            <div class="name">
+                                                <h4>
+                                                    <a style="font-family: b yekan; color: black;" href="#">شروع بلیط فروشی الکترونیکی </a>		
+                                                </h4>
+                                                <br>
+                                            </div>
+                                            <div class="text">
+                                                <p style="font-family: b yekan; color: black;"> از اول اردیبهشت ماه 1401 تمامی بلیط های باشگاه مس کرمان از طریق وبسایت بلیط مس فروش خواهد رفت</p>
+                                                <div class="read-more"><a href="#">بیشتر بخوانید</a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </article>
+
+                                </div>
+                            </div>
+                           
+
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        
+
+        
+        <div class="tm-bottom-b-box tm-full-width  ">
+            <div class="uk-container uk-container-center">
+                <section id="tm-bottom-b" class="tm-bottom-b uk-grid" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin="">
+                    <div class="uk-width-1-1">
+                        <div class="uk-panel">
+                            <div class="our-team-main-wrap">
+                                <div class="uk-container uk-container-center">
+                                    <div class="uk-grid" data-uk-grid-match="">
+                                        <div class="uk-width-medium-8-10 uk-width-small-1-1 uk-push-1-10">
+                                            <div class="our-team-wrap">
+                                                <div class="our-team-title">
+                                                    <h3 style="font-family: b yekan;">برترین  <span>گلزنان</span></h3>
+                                                </div>
+                                                <div style="font-family: b yekan;" class="our-team-text">
+                                                    <p style="font-family: b yekan;"> بازیکنان باشگاه مس کرمان که بیشترین گل زده را در لیگ آزادگان دارند</p>
+                                                </div>
+                                                <div class="our-team-text additional">
+                                                    <p>Cras convallis feugiat felis eget venenatis. Sed leo tellus, luctus eget ante quis, rutrum dignissim enim. Morbi efficitur tellus non mauris tincidunt feugiat. Vestibulum quis nunc in nibh eleifend convallis. Vestibulum nec viverra dui. Suspendisse vel neque eros. Donec tincidunt tempus massa sed vehicula. Integer ullamcorper at elit eu commodo.</p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class=" uk-width-large-1-4 uk-width-medium-1-3 uk-width-small-1-2 player-item tt_2a195f12da9f3f36da06e6097be7e451">
+                                            <div class="player-article">
+                                                <div class="wrapper">
+                                                    <div class="img-wrap">
+                                                        <div class="player-number"><span>گل 4</span>
+                                                        </div>
+                                                        <div class="bio"><span><a href="#"></a></span>
+                                                        </div>
+                                                        <a href="#">
+                                                            <img src="{% static 'images/kazemian.jpg' %}" class="img-polaroid" alt=" " title=" ">
+                                                        </a>
+                                                        
+                                                    </div>
+                                                    <div style="font-family: b yekan; color: black; direction: rtl; text-align: center" class="info">
+                                                        <div class="name">
+                                                            <h3>
+                                                                <a style="font-family: b yekan; color: black; direction: rtl; text-align: center" href="#">   امین کاظمیان </a>
+                                                            </h3>
+                                                        </div>
+                                                        <div class="position">هافبک شماره 69   </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class=" uk-width-large-1-4 uk-width-medium-1-3 uk-width-small-1-2 player-item tt_2a195f12da9f3f36da06e6097be7e451">
+                                            <div class="player-article">
+                                                <div class="wrapper">
+                                                    <div class="img-wrap">
+                                                        <div class="player-number"><span>گل 4</span>
+                                                        </div>
+                                                        <div class="bio"><span><a href="#"></a></span>
+                                                        </div>
+                                                        <a href="#">
+                                                            <img src="{% static 'images/mahyar.jpg' %}" class="img-polaroid" alt=" " title=" ">
+                                                        </a>
+                                                        
+                                                    </div>
+                                                    <div style="font-family: b yekan; color: black; direction: rtl; text-align: center" class="info">
+                                                        <div class="name">
+                                                            <h3>
+                                                                <a style="font-family: b yekan; color: black; direction: rtl; text-align: center" href="#"> مهیار زحمتکش   </a>
+                                                            </h3>
+                                                        </div>
+                                                        <div class="position">مدافع شماره 26 </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class=" uk-width-large-1-4 uk-width-medium-1-3 uk-width-small-1-2 player-item tt_2a195f12da9f3f36da06e6097be7e451">
+                                            <div class="player-article">
+                                                <div class="wrapper">
+                                                    <div class="img-wrap">
+                                                        <div class="player-number"><span>گل 4</span>
+                                                        </div>
+                                                        <div class="bio"><span><a href="#"></a></span>
+                                                        </div>
+                                                        <a href="#">
+                                                            <img src="{% static 'images/mehrdad.jpg' %}" class="img-polaroid" alt=" " title=" ">
+                                                        </a>
+                                                        
+                                                    </div>
+                                                    <div style="font-family: b yekan; color: black; direction: rtl; text-align: center" class="info">
+                                                        <div class="name">
+                                                            <h3>
+                                                                <a style="font-family: b yekan; color: black; direction: rtl; text-align: center" href="#"> مهرداد آوخ </a>
+                                                            </h3>
+                                                        </div>
+                                                        <div class="position">مهاجم شماره 10 </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class=" uk-width-large-1-4 uk-width-medium-1-3 uk-width-small-1-2 player-item tt_2a195f12da9f3f36da06e6097be7e451">
+                                            <div class="player-article">
+                                                <div class="wrapper">
+                                                    <div class="img-wrap">
+                                                        <div class="player-number"><span>گل 4</span>
+                                                        </div>
+                                                        <div class="bio"><span><a href="#"></a></span>
+                                                        </div>
+                                                        <a href="#">
+                                                            <img src="{% static 'images/f9bfc5bc85499506c9e18e5afb2eaf2d.jpg' %}" class="img-polaroid" alt=" " title=" ">
+                                                        </a>
+                                                        
+                                                    </div>
+                                                    <div style="font-family: b yekan; color: black; direction: rtl; text-align: center" class="info">
+                                                        <div class="name">
+                                                            <h3>
+                                                                <a style="font-family: b yekan; color: black; direction: rtl; text-align: center" href="#"> میلاد پورصف شکن </a>
+                                                            </h3>
+                                                        </div>
+                                                        <div class="position">مهاجم شماره 11 </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        
+
+                                    </div>
+                                </div>
+
+                                <div class="our-team-btn"><a href="http://kashefan.org"><span>تمامی حقوق این وبسایت برای شرکت کاشفان مروارید سیاه محفوظ می باشد</span></a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+       
+
+      
+
+      
+
+        
+
+
+
+       
+
+    
+
+<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/uikit.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/SimpleCounter.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/components/grid.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/components/slider.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/components/slideshow.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/components/slideset.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/components/sticky.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/components/lightbox.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/isotope.pkgd.min.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'js/theme.js' %}"></script>
+<script type="text/javascript">
+    new SimpleCounter("countdown4", 1476154800, {
+      'continue': 0,
+      format: '{D} {H} {M} {S}',
+      lang: {
+          d: {
+              single: 'day',
+              plural: 'days'
+          }, //days
+          h: {
+              single: 'hr',
+              plural: 'hrs'
+          }, //hours
+          m: {
+              single: 'min',
+              plural: 'min'
+          }, //minutes
+          s: {
+              single: 'sec',
+              plural: 'sec'
+          } //seconds
+      },
+      formats: {
+          full: "<span class='countdown_number' style='color:  '>{number} </span> <span class='countdown_word' style='color:  '>{word}</span> <span class='countdown_separator'>:</span>", //Format for full units representation
+          shrt: "<span class='countdown_number' style='color:  '>{number} </span>" //Format for short unit representation
+      }
+  });
+</script>
+
+</body>
+
+
+</html>
