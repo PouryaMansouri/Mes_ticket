@@ -99,7 +99,7 @@ class Event(BaseModel):
 
 class Ticket(BaseModel):
     class Meta:
-        verbose_name = _('بلیط'),
+        verbose_name = _('بلیط')
         verbose_name_plural = _('بلیط')
         unique_together = ('event', 'national_code')
 
