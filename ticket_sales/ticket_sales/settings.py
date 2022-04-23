@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-^w_d2&bm@8&jlqys0po(d4hq21nt01hy9l9nfksj)i(ep_4&&j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*',]
 
 
 # Application definition
@@ -37,6 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'colorfield',
+    'django_jalali',
+    'rosetta',
+    'core',
+    'events',
 ]
 
 MIDDLEWARE = [
@@ -104,9 +110,16 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fa'
 
-TIME_ZONE = 'UTC'
+LANGUAGES = (
+    ('en', 'English'),
+    ('fa', 'Farsi'),
+)
+
+LOCALE_PATHS = (BASE_DIR / 'locale',)
+
+TIME_ZONE = 'Asia/Tehran'
 
 USE_I18N = True
 
@@ -117,8 +130,27 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR / 'static', ]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_USER_MODEL = 'core.User'
+LOGIN_URL = 'customers:login'
+LOGIN_REDIRECT_URL = 'events:index'
+LOGOUT_REDIRECT_URL = 'events:index'
+
+# REST_FRAMEWORK = {
+    # 'DEFAULT_THROTTLE_CLASSES': [
+    #     'rest_framework.throttling.AnonRateThrottle',
+    #     'rest_framework.throttling.UserRateThrottle'
+    # ],
+    # 'DEFAULT_THROTTLE_RATES': {
+    #     'anon': '1/minute',
+    #     'user': '1/minute',
+    # }
+# }

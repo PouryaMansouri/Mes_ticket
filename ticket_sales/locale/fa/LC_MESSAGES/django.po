@@ -1,0 +1,148 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-04-04 22:28+0430\n"
+"PO-Revision-Date: 2022-04-04 22:29+0430\n"
+"Last-Translator:   <>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Translated-Using: django-rosetta 0.9.8\n"
+
+#: core/apps.py:8
+msgid "Users"
+msgstr "کاربران"
+
+#: core/models.py:16
+msgid "Create Timestamp"
+msgstr "زمان ساخت"
+
+#: core/models.py:22
+msgid "Update Timestamp"
+msgstr "زمان بروزرسانی"
+
+#: core/models.py:31
+msgid "Phone"
+msgstr "شماره موبایل"
+
+#: core/models.py:35
+msgid "Please Enter a Valid Phone Number!"
+msgstr "لطفا شماره موبال معتبری وارد نمایید!"
+
+#: core/models.py:41
+msgid "National Code"
+msgstr "کدملی!"
+
+#: core/models.py:45
+msgid "National code isn't valid!"
+msgstr "کدملی معتبر نمیباشد!"
+
+#: customers/apis.py:24
+msgid "You haven't registered yet with this phone number!"
+msgstr "کاربری با این شماره موبایل وجود ندارد!"
+
+#: customers/apps.py:8 customers/models.py:10
+msgid "Customers"
+msgstr "مشتریان"
+
+#: customers/forms.py:18
+msgid "Invalid verify code!"
+msgstr "کد تایید نامعتبر است!"
+
+#: customers/forms.py:20
+msgid ""
+"You haven't verify code in server! Go to register page and register to get "
+"it!"
+msgstr ""
+"شما کد تاییدی روی سرور ندارید! برای گرفتن آن به صفحه ثبت نام بروید و ثبت نام"
+" کنید!"
+
+#: customers/models.py:9
+msgid "Customer"
+msgstr "مشتری"
+
+#: events/apps.py:8 events/models.py:12
+msgid "Events"
+msgstr "رویدادها"
+
+#: events/models.py:11 events/models.py:16
+msgid "Event"
+msgstr "رویداد"
+
+#: events/models.py:20
+msgid "Capacity"
+msgstr "ظرفیت"
+
+#: events/models.py:24
+msgid "Remaining Capacity"
+msgstr "ظرفیت باقیمانده"
+
+#: events/models.py:36
+msgid "Ticket"
+msgstr "بلیت"
+
+#: events/models.py:37
+msgid "Tickets"
+msgstr "بلیت ها"
+
+#: events/models.py:51
+msgid "Price"
+msgstr "قیمت"
+
+#: events/models.py:52
+msgid "Price in Toman!"
+msgstr "قیمت به تومان!"
+
+#: site_settings/apps.py:8 site_settings/models.py:11
+msgid "Site Settings"
+msgstr "تنظیمات سایت"
+
+#: site_settings/models.py:10
+msgid "Site Setting"
+msgstr "تنظیمات سایت"
+
+#: site_settings/models.py:15
+msgid "Site Name"
+msgstr "نام سایت"
+
+#: site_settings/models.py:23
+msgid "Background Image"
+msgstr "تصویر پس زمینه"
+
+#: site_settings/models.py:24
+msgid "Please upload an image with 830 width and 480 height!"
+msgstr "لطفا تصویری با عرض ۸۳۰ و ارتفاع ۴۸۰ پیکسل بارگذاری کنید!"
+
+#: site_settings/models.py:32
+msgid "Home Banner"
+msgstr "بنر صفحه اصلی"
+
+#: site_settings/models.py:33
+msgid "Please upload an image with 740 width and 110 height!"
+msgstr "لطفا تصویری با عرض ۷۴۰ و ارتفاع ۱۱۰ پیکسل بارگذاری کنید!"
+
+#: site_settings/models.py:39
+msgid "Contact Phone"
+msgstr "شماره تماس ثابت"
+
+#: site_settings/models.py:40
+msgid "This is const phone. write it with pre number!"
+msgstr "تلفن ثابت به همراه پیش شماره!"
+
+#: site_settings/models.py:43
+msgid "Please Enter a Valid Phone!"
+msgstr "لطفا تلفن معتبری وارد نمایید!"
+
+#: site_settings/models.py:48
+msgid "Email Address"
+msgstr "آدرس ایمیل"
