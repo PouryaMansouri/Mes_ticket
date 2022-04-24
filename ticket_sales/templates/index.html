@@ -1,3 +1,4 @@
+{% load crispy_forms_filters %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en-gb">
@@ -188,10 +189,17 @@
                                 <div class="uk-grid">
                                     <div class="uk-width-1-1">
                                         <div class="btn-wrap uk-container-center">
-                                            <button type="button" class="read-more" style="font-family: b yekan"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#eventticketmodal">خرید بلیط
-                                            </button>
+                                            {% if event.is_available %}
+                                                <button id="buy-ticket-button" type="button" class="read-more"
+                                                        style="font-family: b yekan"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#eventticketmodal">خرید بلیط
+                                                </button>
+                                            {% else %}
+                                                <button type="button" class="btn btn-danger"
+                                                        style="font-family: b yekan">ظرفیت فروش به پایان رسید
+                                                </button>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -555,24 +563,26 @@
         }
     });
 </script>
+{#modal#}
 <div class="modal fade" id="eventticketmodal" tabindex="-1"
      aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-primary">رزرو بلیط</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <button type="button" class="close border-0" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
+                <h5 class="modal-title text-primary">رزرو بلیط</h5>
             </div>
             <div class="modal-body" id="form-container">
                 {% csrf_token %}
                 <div class="ticket-form" dir="rtl">
                     <form id="form-container" method="POST">
-                        <p id="id_event"class="d-none">{{ id_event }}</p>
-                        {{ form.as_p }}
+                        <p id="id_event" class="d-none">{{ event.id }}</p>
+                        {{ form | crispy }}
                     </form>
+                    <p id="errors"></p>
                 </div>
             </div>
             <div class="modal-footer">
@@ -601,13 +611,19 @@
                 national_code: national_code,
                 event: event,
             },
-            success: function () {
-                $('.ticket-form').html('<p class="text-success" style="font-family: b yekan">رزرو شما با موفقیت انجام شذ. <br/>با تشکر از همراهی شما</p>').hide().fadeIn()
+            success: function (success) {
+                console.log(success)
+                $('.field-errors').remove()
+                $('.ticket-form').html(`<p class="text-white border border-success bg-success p-2 rounded" style="font-family: b yekan">هوادار گرامی بلیط شما برای بازی مس-ملوان با کدملی ${success.national_code} در تاریخ ۵ اردیبهشت رزرو گردید.<br/>لطفا در هنگام ورود کارت ملی و کارت واکسن همراه داشته باشید.<br/>از ورود شما بدون کارت واکسن جلوگیری خواهد شد. <br/></p> `).hide().fadeIn()
                 $('#reserve_button').addClass('d-none')
+                $('#buy-ticket-button').removeClass('read-more').addClass('btn btn-success').html('رزرو شد')
             },
             error: function (error) {
-                console.log(error)
-
+                $('.field-errors').remove()
+                for (let field of Object.keys(error.responseJSON)) {
+                    let html = `<p class="text-danger m-auto field-errors"><b class="border-bottom border-danger"></b>${error.responseJSON[field][0]}</p>`
+                    $('#errors').append(html).hide().fadeIn()
+                }
             }
         })
     }
