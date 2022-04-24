@@ -155,3 +155,6 @@ class Ticket(BaseModel):
             self.event_capacity_reducer()
             send_successful_ticket_sms(self.phone, self.national_code)
         super().save(force_insert, force_update, using, update_fields)
+
+    def __str__(self):
+        return self.full_name
