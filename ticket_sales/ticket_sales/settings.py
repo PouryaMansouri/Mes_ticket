@@ -39,11 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'colorfield',
+    'site_settings',
     'django_jalali',
     'rosetta',
     'core',
     'events',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -136,8 +137,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / "static"
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+STATIC_ROOT = BASE_DIR / "static_root"
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -194,3 +199,30 @@ LOGGING = {
         }
     },
 }
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# # Celery Configuration Options
+# CELERY_TIMEZONE = "Asia/Tehran"
+# CELERY_TASK_TRACK_STARTED = True
+# CELERY_TASK_TIME_LIMIT = 30 * 60
+# # todo: change redis server
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django_redis.cache.RedisCache",
+#         "LOCATION": "redis://redis:pass123@redis:6379",
+#         "OPTIONS": {
+#         "CLIENT_CLASS": "django_redis.client.DefaultClient"
+#         },
+#     }
+# }
+
+# CELERY_BROKER_URL = "redis://redis:pass123@redis:6379",
+# CELERY_BROKER_TRANSPORT = 'redis'
+# # todo: change redis server
+# CELERY_RESULT_BACKEND = "redis://redis:pass123@redis:6379",
+# CELERY_ACCEPT_CONTENT = ['application/json']
+# CELERY_TASK_SERIALIZER = 'json'
+# CELERY_RESULT_SERIALIZER = 'json'
+#
+# CACHE_TTL = 600

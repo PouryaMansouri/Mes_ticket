@@ -6,6 +6,9 @@ from django.utils.translation import gettext_lazy as _
 
 from django_jalali.db import models as jmodels
 
+from events import validators
+from events.tasks import celery_successful_ticket_sms, ticket_sms
+
 
 class Team(BaseModel):
     class Meta:
@@ -72,7 +75,6 @@ class Event(BaseModel):
 
     remaining_capacity = models.PositiveIntegerField(
         verbose_name=_('ظرفیت باقیمانده'),
-        editable=False,
     )
 
     price = models.PositiveIntegerField(
@@ -106,7 +108,12 @@ class Ticket(BaseModel):
     full_name = models.CharField(
         _('نام و نام خانوادگی'),
         max_length=150,
-        blank=True
+        validators=[
+            RegexValidator(
+                regex='^[\u0600-\u06FF\s]+$',
+                message=_('لطفا از کیبورد فارسی استفاده کنید.'),
+            ),
+        ]
     )
 
     # birth_datetime = jmodels.jDateTimeField(
@@ -123,8 +130,6 @@ class Ticket(BaseModel):
 
     phone = models.CharField(
         max_length=14,
-        null=True,
-        blank=True,
         verbose_name=_('شماره موبایل'),
         validators=[RegexValidator(
             regex='^(0)?9\d{9}$',
@@ -136,10 +141,7 @@ class Ticket(BaseModel):
         max_length=10,
         verbose_name=_('کدملی'),
         unique=True,
-        validators=[RegexValidator(
-            regex="^(?!(\d)\1{9})\d{10}$",
-            message=_('National code isn\'t valid!')
-        )]
+        validators=[validators.validate_iran_national_code]
     )
 
     is_used = models.BooleanField(
@@ -153,3 +155,12 @@ class Ticket(BaseModel):
         if self.event.remaining_capacity == 0:
             self.event.is_available = False
         self.event.save()
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        if not self.pk:
+            self.event_capacity_reducer()
+            ticket_sms(self.phone, self.national_code)
+        super().save(force_insert, force_update, using, update_fields)
+
+    def __str__(self):
+        return self.full_name

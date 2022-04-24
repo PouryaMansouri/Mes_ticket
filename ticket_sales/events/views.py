@@ -2,7 +2,7 @@ from django.urls import reverse_lazy
 from django.views.generic import FormView
 
 from events.forms import TicketForm
-from events.models import Ticket, Event
+from events.models import Event
 
 
 class Index(FormView):
@@ -12,7 +12,7 @@ class Index(FormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['id_event'] = Event.objects.first().id
+        context['event'] = Event.objects.first()
         return context
 
 

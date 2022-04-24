@@ -1,13 +1,13 @@
 import os
 
 # Set environment variables
-test = "test_server"
-if test == "test_server":
+test = "sersver"
+if test == "server":
     os.environ['APP_SECRET_KEY'] = 'django-insecure-_3%up&jx^vfhsdfasdfaw3rawdfsdefaw3'
     os.environ['DJANGO_DEBUG'] = 'False'
     os.environ['DJANGO_ALLOWED_HOSTS'] = '* localhost inventorytest-mansouri.fandogh.cloud'
     os.environ['APP_DB_ENGINE'] = 'django.db.backends.postgresql_psycopg2'
-    os.environ['DB_NAME'] = 'belitmes'
+    os.environ['DB_NAME'] = 'belitmes_main'
     os.environ['DB_USER'] = 'postgres'
     os.environ['DB_PASSWORD'] = 'asdfl2k323f90s@42'
     os.environ['DB_HOST'] =  'callcenter-dbms'
