@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rosetta',
     'core',
     'events',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
