@@ -622,7 +622,7 @@
                 $('.field-errors').remove()
                 for (let field of Object.keys(error.responseJSON)) {
                     let html = `<p class="text-danger m-auto field-errors"><b class="border-bottom border-danger"></b>${error.responseJSON[field][0]}</p>`
-                    $('#errors').append(html).hide().fadeIn()
+                    $(`#id_${field}`).after(html).hide().fadeIn()
                 }
             }
         })
