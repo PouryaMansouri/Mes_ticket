@@ -11,12 +11,16 @@ class SiteSetting(SingletonBaseModel):
 
     kavenegar_api_key = models.CharField(
         max_length=150,
-        verbose_name=_('کد API key کاوه نگار')
+        verbose_name=_('کد API key کاوه نگار'),
+        null=True,
+        blank=True
     )
 
     kavenegar_sender = models.CharField(
         max_length=150,
-        verbose_name=_('فرستنده پیامک کاوه نگار')
+        verbose_name=_('فرستنده پیامک کاوه نگار'),
+        null=True,
+        blank=True
     )
 
     def __str__(self):
