@@ -6,6 +6,7 @@ from django.utils.translation import gettext_lazy as _
 
 from django_jalali.db import models as jmodels
 
+from events import validators
 from utils import send_successful_ticket_sms
 
 
@@ -134,10 +135,7 @@ class Ticket(BaseModel):
         max_length=10,
         verbose_name=_('کدملی'),
         unique=True,
-        validators=[RegexValidator(
-            regex="^(?!(\d)\1{9})\d{10}$",
-            message=_('National code isn\'t valid!')
-        )]
+        validators=[validators.validate_iran_national_code]
     )
 
     is_used = models.BooleanField(
