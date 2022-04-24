@@ -612,7 +612,6 @@
                 event: event,
             },
             success: function (success) {
-                console.log(success)
                 $('.field-errors').remove()
                 $('.ticket-form').html(`<p class="text-white border border-success bg-success p-2 rounded" style="font-family: b yekan">هوادار گرامی بلیط شما برای بازی مس-ملوان با کدملی ${success.national_code} در تاریخ ۵ اردیبهشت رزرو گردید.<br/>لطفا در هنگام ورود کارت ملی و کارت واکسن همراه داشته باشید.<br/>از ورود شما بدون کارت واکسن جلوگیری خواهد شد. <br/></p> `).hide().fadeIn()
                 $('#reserve_button').addClass('d-none')
