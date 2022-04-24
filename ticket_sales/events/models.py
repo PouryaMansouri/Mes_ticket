@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 from django_jalali.db import models as jmodels
 
 from events import validators
-from utils import send_successful_ticket_sms
+from events.tasks import celery_successful_ticket_sms, ticket_sms
 
 
 class Team(BaseModel):
@@ -159,7 +159,7 @@ class Ticket(BaseModel):
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         if not self.pk:
             self.event_capacity_reducer()
-            send_successful_ticket_sms(self.phone, self.national_code)
+            ticket_sms(self.phone, self.national_code)
         super().save(force_insert, force_update, using, update_fields)
 
     def __str__(self):

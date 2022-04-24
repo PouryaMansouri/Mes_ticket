@@ -15,7 +15,7 @@ def send_successful_ticket_sms(phone, national_code):
                 'receptor': f'{phone}',
                 'message': f'سلام هوادار گرامی\nبلیط شما برای بازی مس-ملوان با کدملی {national_code} در تاریخ ۵ اردیبهشت رزرو گردید.\nلطفا در هنگام ورود کارت ملی و کارت واکسن همراه داشته باشید.\nاز ورود شما بدون کارت واکسن جلوگیری میشود.',
             }
-            # response = api.sms_send(params)
+            response = api.sms_send(params)
             # todo: uncomment upper line
             # print(response)
         except APIException as e:
