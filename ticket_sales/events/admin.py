@@ -18,7 +18,9 @@ class TicketAdmin(BaseAdmin):
 
     search_fields = ['full_name','phone','national_code']
 
-    list_filter = ['event']
+    list_editable = ['is_used']
+
+    list_filter = ['is_used']
 
 admin.site.register(Event, EventAdmin)
 admin.site.register(Ticket, TicketAdmin)

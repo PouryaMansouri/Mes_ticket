@@ -6,18 +6,21 @@
 
 <head>
 
+
+<style>
+@font-face {
+  font-family: b yekan;
+  src: url({% static 'fonts/Yekan.ttf'%});
+}
+</style>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>رزرو بلیط آنلان</title>
-    <link href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
+    <title>رزرو بلیط آنلاین</title>
     <link href="{% static 'images/favicon.ico' %}" rel="shortcut icon" type="image/vnd.microsoft.icon">
     <link href="{% static 'css/akslider.css' %}" rel="stylesheet" type="text/css"/>
     <link href="{% static 'css/donate.css' %}" rel="stylesheet" type="text/css"/>
     <link href="{% static 'css/theme.css' %}" rel="stylesheet" type="text/css"/>
-    {#    <script type='text/javascript'#}
-    {#            src='../../ajax.googleapis.com/ajax/libs/mootools/1.3.1/mootools-yui-compressed.js'></script>#}
-
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-G5MVF6NXSC"></script>
@@ -28,7 +31,6 @@
 
   gtag('config', 'G-G5MVF6NXSC');
 </script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
@@ -191,7 +193,7 @@
                                 <div class="uk-grid">
                                     <div class="uk-width-8-12 uk-container-center text">
                                         <p style="font-family: b yekan; color: black;"> فروش بلیط این بازی فقط به صورت
-                                            الکترونیکی و از طریق سایت امکان پذیر خواهد بود. در ضمن همراه داشتن گواهی
+                                            الکترونیکی و از طریق سایت <br> امکان پذیر خواهد بود. در ضمن همراه داشتن گواهی
                                             واکسن نیز الزامی می باشد</p>
                                     </div>
                                 </div>
@@ -203,7 +205,7 @@
                                                 <button id="buy-ticket-button" type="button" class="read-more"
                                                         style="font-family: b yekan"
                                                         data-bs-toggle="modal"
-                                                        data-bs-target="#eventticketmodal">خرید بلیط
+                                                        data-bs-target="#eventticketmodal">رزرو بلیط
                                                 </button>
                                             {% else %}
                                                 <button type="button" class="btn btn-danger"
@@ -535,7 +537,6 @@
 
 <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/uikit.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/SimpleCounter.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/components/grid.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/components/slider.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/components/slideshow.js' %}"></script>
@@ -545,34 +546,34 @@
 <script type="text/javascript" src="{% static 'js/isotope.pkgd.min.js' %}"></script>
 
 <script type="text/javascript" src="{% static 'js/theme.js' %}"></script>
-<script type="text/javascript">
-    new SimpleCounter("countdown4", 1476154800, {
-        'continue': 0,
-        format: '{D} {H} {M} {S}',
-        lang: {
-            d: {
-                single: 'day',
-                plural: 'days'
-            }, //days
-            h: {
-                single: 'hr',
-                plural: 'hrs'
-            }, //hours
-            m: {
-                single: 'min',
-                plural: 'min'
-            }, //minutes
-            s: {
-                single: 'sec',
-                plural: 'sec'
-            } //seconds
-        },
-        formats: {
-            full: "<span class='countdown_number' style='color:  '>{number} </span> <span class='countdown_word' style='color:  '>{word}</span> <span class='countdown_separator'>:</span>", //Format for full units representation
-            shrt: "<span class='countdown_number' style='color:  '>{number} </span>" //Format for short unit representation
-        }
-    });
-</script>
+{#<script type="text/javascript">#}
+{#    new SimpleCounter("countdown4", 1476154800, {#}
+{#        'continue': 0,#}
+{#        format: '{D} {H} {M} {S}',#}
+{#        lang: {#}
+{#            d: {#}
+{#                single: 'day',#}
+{#                plural: 'days'#}
+{#            }, //days#}
+{#            h: {#}
+{#                single: 'hr',#}
+{#                plural: 'hrs'#}
+{#            }, //hours#}
+{#            m: {#}
+{#                single: 'min',#}
+{#                plural: 'min'#}
+{#            }, //minutes#}
+{#            s: {#}
+{#                single: 'sec',#}
+{#                plural: 'sec'#}
+{#            } //seconds#}
+{#        },#}
+{#        formats: {#}
+{#            full: "<span class='countdown_number' style='color:  '>{number} </span> <span class='countdown_word' style='color:  '>{word}</span> <span class='countdown_separator'>:</span>", //Format for full units representation#}
+{#            shrt: "<span class='countdown_number' style='color:  '>{number} </span>" //Format for short unit representation#}
+{#        }#}
+{#    });#}
+{#</script>#}
 {#modal#}
 <div class="modal fade" id="eventticketmodal" tabindex="-1"
      aria-labelledby="exampleModalLabel"
