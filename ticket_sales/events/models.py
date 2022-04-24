@@ -108,6 +108,12 @@ class Ticket(BaseModel):
     full_name = models.CharField(
         _('نام و نام خانوادگی'),
         max_length=150,
+        validators=[
+            RegexValidator(
+                regex='^[\u0600-\u06FF\s]+$',
+                message=_('لطفا از کیبورد فارسی استفاده کنید.'),
+            ),
+        ]
     )
 
     # birth_datetime = jmodels.jDateTimeField(
