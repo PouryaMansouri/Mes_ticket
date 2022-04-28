@@ -133,7 +133,7 @@ class Ticket(BaseModel):
         verbose_name=_('شماره موبایل'),
         validators=[RegexValidator(
             regex='^(0)?9\d{9}$',
-            message=_('Please Enter a Valid Phone Number!')
+            message=_('شماره موبایل معتبر نمیباشد!')
         )]
     )
 
