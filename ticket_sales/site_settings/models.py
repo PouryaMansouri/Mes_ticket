@@ -9,6 +9,14 @@ class SiteSetting(SingletonBaseModel):
         verbose_name = _('تنظیمات سایت')
         verbose_name_plural = _('تنظیمات سایت')
 
+    home_banner = models.ImageField(
+        null=True,
+        blank=True,
+        upload_to='site_settings',
+        verbose_name=_('بنر صفحه اصلی'),
+        help_text=_('لطفا تصویری با عرض ۱۹۲۰ و ارتفاع ۸۱۰ پیکسل بارگذاری نمایید.')
+    )
+
     kavenegar_api_key = models.CharField(
         max_length=150,
         verbose_name=_('کد API key کاوه نگار'),
@@ -24,4 +32,4 @@ class SiteSetting(SingletonBaseModel):
     )
 
     def __str__(self):
-        return 'site setting'
+        return 'تنظیمات سایت'
