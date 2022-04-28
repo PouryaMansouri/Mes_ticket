@@ -4,6 +4,7 @@ from django.core.validators import RegexValidator
 from django.utils.translation import gettext_lazy as _
 
 from core.manager import MyUserManager
+from events import validators
 
 
 class BaseModel(models.Model):
@@ -13,13 +14,13 @@ class BaseModel(models.Model):
     created = models.DateTimeField(
         auto_now_add=True,
         editable=False,
-        verbose_name=_('Create Timestamp'),
+        verbose_name=_('زمان ساخت'),
     )
 
     last_updated = models.DateTimeField(
         auto_now=True,
         editable=False,
-        verbose_name=_('Update Timestamp'),
+        verbose_name=_('زمان بروزرسانی'),
     )
 
 
@@ -28,22 +29,19 @@ class User(AbstractUser):
 
     phone = models.CharField(
         max_length=14,
-        verbose_name=_('Phone'),
+        verbose_name=_('شماره موبایل'),
         unique=True,
         validators=[RegexValidator(
             regex='^(0)?9\d{9}$',
-            message=_('Please Enter a Valid Phone Number!')
+            message=_('لطفا شماره موبایل معتبری وارد نمایید!')
         )]
     )
 
     national_code = models.CharField(
         max_length=10,
-        verbose_name=_('National Code'),
+        verbose_name=_('کدملی'),
         unique=True,
-        validators=[RegexValidator(
-            regex="^(?!(\d)\1{9})\d{10}$",
-            message=_('National code isn\'t valid!')
-        )]
+        validators=[validators.validate_iran_national_code]
     )
 
     USERNAME_FIELD = 'phone'
