@@ -17,6 +17,13 @@ class SiteSetting(SingletonBaseModel):
         help_text=_('لطفا تصویری با عرض ۱۹۲۰ و ارتفاع ۸۱۰ پیکسل بارگذاری نمایید.')
     )
 
+    home_link = models.URLField(
+        null=True,
+        blank=True,
+        default='belitmes.ir',
+        verbose_name=_('لینک صفحه اصلی'),
+    )
+
     kavenegar_api_key = models.CharField(
         max_length=150,
         verbose_name=_('کد API key کاوه نگار'),
