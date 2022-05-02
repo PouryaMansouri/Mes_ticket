@@ -140,7 +140,6 @@ class Ticket(BaseModel):
     national_code = models.CharField(
         max_length=10,
         verbose_name=_('کدملی'),
-        unique=True,
         validators=[validators.validate_iran_national_code]
     )
 

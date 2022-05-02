@@ -12,7 +12,7 @@ class Index(FormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['event'] = Event.objects.first()
+        context['event'] = Event.objects.last()
         return context
 
 

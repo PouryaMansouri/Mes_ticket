@@ -20,7 +20,7 @@ else:
     os.environ['DJANGO_ALLOWED_HOSTS'] = '* localhost'
     os.environ['APP_DB_ENGINE'] = 'django.db.backends.postgresql_psycopg2'
     os.environ['DB_NAME'] = 'belitmes'
-    os.environ['DB_USER'] = 'pourya'
+    os.environ['DB_USER'] = 'emad'
     os.environ['DB_PASSWORD'] = '123456'
     os.environ['DB_HOST'] = 'localhost'
     os.environ['DB_PORT'] = '5432'
