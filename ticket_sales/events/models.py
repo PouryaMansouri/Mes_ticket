@@ -29,6 +29,8 @@ class Team(BaseModel):
         help_text=_('لطفا تصویری با عرض y و ارتفاع x پیکسل بارگذاری نمایید.')
     )
 
+    # TODO: add __str__ method
+
 
 class Event(BaseModel):
     class Meta:
