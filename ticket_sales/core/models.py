@@ -46,6 +46,9 @@ class User(AbstractUser):
 
     USERNAME_FIELD = 'phone'
 
+    # TODO: add REQUIRED_FIELDS
+    # TODO: add __str__ method
+
     def save(self, *args, **kwargs):
         self.username = self.phone
         super().save(*args, **kwargs)
