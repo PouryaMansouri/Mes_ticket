@@ -14,9 +14,9 @@ from pathlib import Path
 from decouple import config
 import secret
 import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -27,23 +27,25 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = ['*','localhost']
-
+ALLOWED_HOSTS = ['*', 'localhost']
 
 # Application definition
 
 Ticket_APPS = [
-    'rest_framework',
     'site_settings',
-    'django_jalali',
-    'rosetta',
     'core',
     'events',
-    'crispy_forms',
     'teams',
 ]
 
-INSTALLED_APPS = [
+THIRD_PARTY_APPS = [
+    'rest_framework',
+    'django_jalali',
+    'crispy_forms',
+    'rosetta',
+]
+
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -53,7 +55,7 @@ INSTALLED_APPS = [
 
 ]
 
-INSTALLED_APPS += Ticket_APPS
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + Ticket_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -86,7 +88,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ticket_sales.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 if DEBUG:
@@ -108,8 +109,6 @@ else:
         }
     }
 
-
-
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
@@ -128,7 +127,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
@@ -146,7 +144,6 @@ TIME_ZONE = 'Asia/Tehran'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -171,14 +168,14 @@ LOGIN_REDIRECT_URL = 'events:index'
 LOGOUT_REDIRECT_URL = 'events:index'
 
 # REST_FRAMEWORK = {
-    # 'DEFAULT_THROTTLE_CLASSES': [
-    #     'rest_framework.throttling.AnonRateThrottle',
-    #     'rest_framework.throttling.UserRateThrottle'
-    # ],
-    # 'DEFAULT_THROTTLE_RATES': {
-    #     'anon': '1/minute',
-    #     'user': '1/minute',
-    # }
+# 'DEFAULT_THROTTLE_CLASSES': [
+#     'rest_framework.throttling.AnonRateThrottle',
+#     'rest_framework.throttling.UserRateThrottle'
+# ],
+# 'DEFAULT_THROTTLE_RATES': {
+#     'anon': '1/minute',
+#     'user': '1/minute',
+# }
 # }
 
 # Email config
