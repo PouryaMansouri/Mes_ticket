@@ -16,7 +16,7 @@ jQuery(function($) {
     });
 
     
-   jQuery('.our-team-wrap .team-read-more').click(function(){
+   jQuery('.our-teams-wrap .teams-read-more').click(function(){
        jQuery(this).parent().parent().find('.additional').slideToggle();
        return false;
    });

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 import secret
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -45,7 +46,7 @@ INSTALLED_APPS = [
     'core',
     'events',
     'crispy_forms',
-    'team',
+    'teams',
 ]
 
 MIDDLEWARE = [
@@ -82,13 +83,24 @@ WSGI_APPLICATION = 'ticket_sales.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': config('ENGINE'),
+            'NAME': config('NAME'),
+            'USER': config('USER'),
+            'PASSWORD': config('PASSWORD'),
+            'HOST': config('HOST'),
+            'PORT': config('PORT'),
+        }
+    }
 
 
 

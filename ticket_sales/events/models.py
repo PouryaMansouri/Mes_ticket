@@ -9,7 +9,7 @@ from django_jalali.db import models as jmodels
 from events import validators
 from events.tasks import celery_successful_ticket_sms, ticket_sms
 
-from team.models import Team
+from teams.models import Team
 
 
 class Event(BaseModel):
