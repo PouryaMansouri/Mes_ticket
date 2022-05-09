@@ -12,8 +12,9 @@ class Team(BaseModel):
         max_length=50, verbose_name=_('نام تیم')
     )
     logo = models.ImageField(
-        upload_to='teams', verbose_name=_('لوگوی تیم'),
-        blank=True, null=True
+        upload_to='teams/', verbose_name=_('لوگوی تیم'),
+        blank=True, null=True,
+        help_text = 'لطفا تصویری با طول x و عرض y بارگزاری کنید.'
     )
 
     def __str__(self):
