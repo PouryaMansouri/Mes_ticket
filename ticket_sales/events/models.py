@@ -9,27 +9,7 @@ from django_jalali.db import models as jmodels
 from events import validators
 from events.tasks import celery_successful_ticket_sms, ticket_sms
 
-
-class Team(BaseModel):
-    class Meta:
-        verbose_name = _('تیم')
-        verbose_name_plural = _('تیم')
-
-    name = models.CharField(
-        max_length=150,
-        verbose_name=_('نام تیم')
-    )
-
-    logo = models.ImageField(
-        null=True,
-        blank=True,
-        # default='events/default.jpg',
-        upload_to='events/teams',
-        verbose_name=_('لوگو'),
-        help_text=_('لطفا تصویری با عرض y و ارتفاع x پیکسل بارگذاری نمایید.')
-    )
-
-    # TODO: add __str__ method
+from team.models import Team
 
 
 class Event(BaseModel):
