@@ -1,3 +1,6 @@
+import datetime
+
+import jdatetime
 from django.core.validators import RegexValidator
 from django.db import models
 
@@ -10,6 +13,7 @@ from events import validators
 from events.tasks import celery_successful_ticket_sms, ticket_sms
 
 from teams.models import Team
+from django.core.exceptions import ValidationError
 
 
 class Event(BaseModel):
@@ -79,6 +83,13 @@ class Event(BaseModel):
 
     def __str__(self):
         return f'{self.home_team.name} | {self.away_team.name}'
+
+    @property
+    def is_available_event(self):
+        now = jdatetime.datetime.now()
+        if now > self.datetime:
+            return False
+        return True
 
 
 class Ticket(BaseModel):
