@@ -10,7 +10,7 @@ import django_jalali.admin as jadmin
 
 class EventAdmin(BaseAdmin):
     list_filter = (
-        ('datetime', JDateFieldListFilter),
+        ('event_time', JDateFieldListFilter),
     )
 
 

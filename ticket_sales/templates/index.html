@@ -64,7 +64,7 @@
                                     <address style="font-family: b yekan;">ورزشگاه شهید باهنر کرمان<br><br></address>
                                 </div>
                                 <div class="date">
-                                    {{ event.datetime|jformat:"%A %d %B %Y %H:%M" }}
+                                    {{ event_date }}
                                 </div>
                             </div>
                         </div>
@@ -79,7 +79,7 @@
                                     </div>
                                     <div class="uk-width-3-12 name uk-vertical-align">
                                         <div class="wrap uk-vertical-align-middle">
-                                            {{ event.home_team }}
+                                            {{ event.home_team.name }}
                                         </div>
                                     </div>
                                     <div class="uk-width-2-12 score">
@@ -92,7 +92,7 @@
                                     </div>
                                     <div class="uk-width-3-12 name alt uk-vertical-align">
                                         <div class="wrap uk-vertical-align-middle">
-                                            {{ event.away_team }}
+                                            {{ event.away_team.name }}
                                         </div>
                                     </div>
                                     <div class="uk-width-2-12 center">

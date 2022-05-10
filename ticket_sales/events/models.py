@@ -13,7 +13,8 @@ from events import validators
 from events.tasks import celery_successful_ticket_sms, ticket_sms
 
 from teams.models import Team
-from django.core.exceptions import ValidationError
+
+from utils import change_jajali_time_to_string
 
 
 class Event(BaseModel):
@@ -35,7 +36,7 @@ class Event(BaseModel):
         related_name='away_team_set'
     )
 
-    datetime = jmodels.jDateTimeField(
+    event_time = jmodels.jDateTimeField(
         verbose_name=_('زمان برگزاری'),
         null=True,
     )
@@ -87,9 +88,14 @@ class Event(BaseModel):
     @property
     def is_available_event(self):
         now = jdatetime.datetime.now()
-        if now > self.datetime:
+        if now > self.event_time:
             return False
         return True
+
+    @property
+    def str_event_time(self) -> str:
+        res = change_jajali_time_to_string(self.event_time)
+        return res
 
 
 class Ticket(BaseModel):
