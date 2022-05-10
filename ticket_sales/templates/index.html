@@ -1,6 +1,7 @@
 {% extends '_layout/base.html' %}
 {% load site_settings_tags %}
 {% load crispy_forms_filters %}
+{% load jformat %}
 {% load static %}
 
 {% block title %}رزرو بلیط آنلاین{% endblock %}
@@ -63,7 +64,7 @@
                                     <address style="font-family: b yekan;">ورزشگاه شهید باهنر کرمان<br><br></address>
                                 </div>
                                 <div class="date">
-                                    پانزدهم اردیبهشت ماه | 19:00
+                                    {{ event.datetime|jformat:"%A %d %B %Y %H:%M" }}
                                 </div>
                             </div>
                         </div>
@@ -72,13 +73,13 @@
                                 <div class="uk-grid uk-flex uk-flex-middle">
                                     <div class="uk-width-2-12 center">
                                         <a href="#">
-                                            <img src="{% static 'images/club-logo.png' %}" class="img-polaroid" alt=""
+                                            <img src="{{ event.home_team.logo.url }}" class="img-polaroid" alt=""
                                                  title="">
                                         </a>
                                     </div>
                                     <div class="uk-width-3-12 name uk-vertical-align">
                                         <div class="wrap uk-vertical-align-middle">
-                                            مس کرمان
+                                            {{ event.home_team }}
                                         </div>
                                     </div>
                                     <div class="uk-width-2-12 score">
@@ -91,12 +92,12 @@
                                     </div>
                                     <div class="uk-width-3-12 name alt uk-vertical-align">
                                         <div class="wrap uk-vertical-align-middle">
-                                            قشقایی شیراز
+                                            {{ event.away_team }}
                                         </div>
                                     </div>
                                     <div class="uk-width-2-12 center">
                                         <a href="#">
-                                            <img src="{% static 'images/club-logo1.png' %}" class="img-polaroid" alt=""
+                                            <img src="{{ event.away_team.logo.url }}" class="img-polaroid" alt=""
                                                  title="">
                                         </a>
                                     </div>
@@ -117,15 +118,16 @@
                                     <div class="uk-grid">
                                         <div class="uk-width-1-1">
                                             <div class="btn-wrap uk-container-center">
-                                                {% if event.is_available %}
+                                                {% if event.is_available_event %}
                                                     <button id="buy-ticket-button" type="button" class="read-more"
                                                             style="font-family: b yekan"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#eventticketmodal">رزرو بلیط
                                                     </button>
+
                                                 {% else %}
                                                     <button type="button" class="btn btn-danger"
-                                                            style="font-family: b yekan">ظرفیت فروش به پایان رسید
+                                                            style="font-family: b yekan">مدت زمان رزرو بلیط به پایان رسیده است.
                                                     </button>
                                                 {% endif %}
                                             </div>
