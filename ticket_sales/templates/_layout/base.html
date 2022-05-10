@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+
+{# head #}
+{% include 'includes/head.html' %}
+<title>{% block title %} {% endblock %}</title>
+
+<body class="tm-isblog">
+    {% include 'includes/extra.html' %}
+    {% include 'includes/navbar.html' %}
+
+{% block content %}{% endblock %}
+    {% include 'includes/footer.html' %}
+
+</body>`

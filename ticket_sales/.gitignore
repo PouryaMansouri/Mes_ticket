@@ -5,6 +5,7 @@
 __pycache__
 db.sqlite3
 media
+.env
 
 # Backup files #
 *.bak
@@ -138,3 +139,4 @@ GitHub.sublime-settings
 
 .idea
 .idea/
+*/migrations/*
