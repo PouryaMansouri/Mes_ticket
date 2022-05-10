@@ -31,7 +31,7 @@ ALLOWED_HOSTS = ['*', 'localhost']
 
 # Application definition
 
-Ticket_APPS = [
+TICKET_APPS = [
     'site_settings',
     'core',
     'events',
@@ -55,7 +55,7 @@ DJANGO_APPS = [
 
 ]
 
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + Ticket_APPS
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + TICKET_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
