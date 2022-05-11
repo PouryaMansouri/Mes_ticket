@@ -36,6 +36,7 @@ TICKET_APPS = [
     'core',
     'events',
     'teams',
+    'accounts',
 ]
 
 THIRD_PARTY_APPS = [
@@ -162,7 +163,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-AUTH_USER_MODEL = 'core.User'
+AUTH_USER_MODEL = 'accounts.User'
 LOGIN_URL = 'customers:login'
 LOGIN_REDIRECT_URL = 'events:index'
 LOGOUT_REDIRECT_URL = 'events:index'
