@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.core.mail import send_mail
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from .managers import UserManager
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -38,7 +39,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=50, blank=True, null=True, verbose_name=_("First Name"), )
     last_name = models.CharField(max_length=50, blank=True, null=True, verbose_name=_("Last Name"), )
     email = models.EmailField(unique=True, verbose_name=_("email"), )
-    phone_number = models.CharField(max_length=20, blank=True, null=True, verbose_name=_("Phone Number"), )
+    phone_number = models.CharField(unique=True,max_length=20, blank=True, null=True, verbose_name=_("Phone Number"), )
 
     # auth fields
     is_staff = models.BooleanField(
@@ -55,8 +56,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     update_date = models.DateTimeField(auto_now=True, verbose_name=_('Update Date'), )
     date_joined = models.DateTimeField(auto_now_add=True, verbose_name=_('Date Joined'), )
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['phone_number', 'first_name', 'last_name']
+    object = UserManager()
+
+    USERNAME_FIELD = 'phone_number'
+    REQUIRED_FIELDS = ['email', 'first_name', 'last_name']
 
     class Meta:
         verbose_name = _("User")
