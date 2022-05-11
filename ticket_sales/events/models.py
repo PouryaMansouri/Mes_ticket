@@ -86,9 +86,15 @@ class Event(BaseModel):
         return f'{self.home_team.name} | {self.away_team.name}'
 
     @property
-    def is_available_event(self):
+    def is_time(self):
         now = jdatetime.datetime.now()
         if now > self.event_time:
+            return False
+        return True
+
+    @property
+    def is_capacity(self):
+        if self.remaining_capacity == 0:
             return False
         return True
 
