@@ -118,18 +118,25 @@
                                     <div class="uk-grid">
                                         <div class="uk-width-1-1">
                                             <div class="btn-wrap uk-container-center">
-                                                {% if event.is_available_event %}
-                                                    <button id="buy-ticket-button" type="button" class="read-more"
-                                                            style="font-family: b yekan"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#eventticketmodal">رزرو بلیط
+                                                {% if not event.is_time %}
+                                                    <button type="button" class="btn btn-danger"
+                                                            style="font-family: b yekan">مدت زمان رزرو بلیط به پایان رسیده است
+                                                    </button>
+
+                                                {% elif not event.is_capacity %}
+                                                    <button type="button" class="btn btn-danger"
+                                                            style="font-family: b yekan">ظرفیت ورزشگاه تکمیل است
                                                     </button>
 
                                                 {% else %}
-                                                    <button type="button" class="btn btn-danger"
-                                                            style="font-family: b yekan">مدت زمان رزرو بلیط به پایان رسیده است.
+                                                    <button id="buy-ticket-button" type="button" class="read-more"
+                                                                style="font-family: b yekan"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#eventticketmodal">رزرو بلیط
                                                     </button>
+
                                                 {% endif %}
+
                                             </div>
                                         </div>
                                     </div>
