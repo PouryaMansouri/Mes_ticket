@@ -245,9 +245,9 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
     text-align: center;
     vertical-align: middle;
     cursor: pointer;
-    
+
     *border: 0;
-    
+
 }
 /* Headings
  ========================================================================== */
@@ -15958,7 +15958,7 @@ table {
 .list-article .wrapper {
   position: relative;
 }
-.list-article .article-actions { 
+.list-article .article-actions {
   position: relative;
  }
  .pagination {
@@ -15988,7 +15988,7 @@ table {
 }
 
 .mes-color {
-  color: #ff9222; 
+  color: #ff9222;
 }
 #sort_count { margin-bottom: 20px; }
 
