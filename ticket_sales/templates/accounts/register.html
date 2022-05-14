@@ -1,26 +1,33 @@
 {% extends '_layout/base.html' %}
+{% load static %}
 
 {% block title %}
-    ثبت نام کاربر
+    ورود کاربر
 {% endblock %}
 
 {% block content %}
     <!-- start section -->
-    <br>
-    <br>
-    <br>
-        <section class="p-5 wow animate__fadeIn">
+            <section style="background-color: #ffa859 "  class="wow animate__fadeIn">
             <div class="container">
-                <div class="p-5 row justify-content-center">
+                <div style="padding-top: 150px; padding-bottom: 150px" class="row justify-content-center">
                     <div class="col-12 col-xl-5 offset-xl-1 col-md-6 lg-padding-30px-lr md-padding-15px-lr">
-                        <h6 class="alt-font font-weight-500 text-extra-dark-gray">ثبت نام</h6>
+                        <h4 style="text-align: right" class="alt-font font-weight-500 text-extra-dark-gray">ثبت نام</h4>
+                        <hr/>
                         <form action="" method="post" class="border-all border-color-medium-gray padding-4-rem-all lg-margin-35px-top md-padding-2-half-rem-all">
                             {% csrf_token %}
-                                {% for field in form_register %}
-                                    {{ field.label }}
-                                    {{ field }}
-                                {% endfor %}
-                            <button class="btn btn-medium btn-fancy btn-dark-gray w-100" type="submit">Register</button>
+                                <p style="text-align: right; font-size: 18px">:{{ form_register.phone_number.label }}</p>
+                            <div>{{ form_register.phone_number }}</div>
+                            <p style="text-align: right; font-size: 18px">:{{ form_register.email.label }}</p>
+                            <div>{{ form_register.email }}</div>
+                            <p style="text-align: right; font-size: 18px">:{{ form_register.password.label }}</p>
+                            <div>{{ form_register.password }}</div>
+                            <p style="text-align: right; font-size: 18px">:{{ form_register.national_code.label }}</p>
+                            <div>{{ form_register.national_code }}</div>
+                            <p style="text-align: right; font-size: 18px">:{{ form_register.first_name.label }}</p>
+                            <div>{{ form_register.first_name }}</div>
+                            <p style="text-align: right; font-size: 18px">:{{ form_register.last_name.label }}</p>
+                            <div>{{ form_register.last_name }}</div>
+                            <button class="btn btn-medium btn-fancy btn-dark-gray w-100" type="submit">ثبت نام</button>
                         </form>
                     </div>
                 </div>

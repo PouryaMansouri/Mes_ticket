@@ -40,7 +40,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(max_length=50, blank=True, null=True, verbose_name=_("Last Name"), )
     email = models.EmailField(unique=True, verbose_name=_("email"), )
     phone_number = models.CharField(unique=True,max_length=20, blank=True, null=True, verbose_name=_("Phone Number"), )
-    national_code = models.PositiveIntegerField(unique=True, verbose_name=_('National Code'), blank=True, null=True )
+    national_code = models.CharField(max_length=10 ,unique=True, verbose_name=_('National Code'), blank=True, null=True )
     # auth fields
     is_staff = models.BooleanField(
         _('staff status'),
@@ -59,7 +59,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'phone_number'
-    REQUIRED_FIELDS = ['email', 'first_name', 'last_name']
+    REQUIRED_FIELDS = ['email', 'national_code', 'first_name', 'last_name']
 
     class Meta:
         verbose_name = _("User")

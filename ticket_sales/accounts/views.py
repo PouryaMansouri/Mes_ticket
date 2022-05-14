@@ -21,7 +21,7 @@ class UserRegisterView(View):
             User.objects.create_user(
                 phone_number=cd['phone_number'],
                 email=cd['email'],
-                password=cd['password1'],
+                password=cd['password'],
                 first_name=cd['first_name'],
                 last_name=cd['last_name']
             )
@@ -47,8 +47,8 @@ class UserLoginView(View):
             if user is not None:
                 login(request, user)
                 return redirect('events:index')
-            return render(request, self.template_name, {'form-login': form})
-        return render(request, self.template_name, {'form-login': form})
+            return render(request, self.template_name, {'form_login': form})
+        return render(request, self.template_name, {'form_login': form})
 
 
 class UserLogoutView(LoginRequiredMixin, View):
