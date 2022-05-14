@@ -15,6 +15,7 @@
 
                 <ul style="direction: rtl;" class="uk-navbar-nav uk-hidden-small">
                     <li style="float: right;"><a href="#">خانه</a>
+
                     <li style="float: right;"><a href="#">اخبار</a>
 
                     <li style="float: right;" data-uk-dropdown="{'preventflip':'y'}" aria-haspopup="true"
@@ -26,6 +27,16 @@
                         aria-haspopup="true" aria-expanded="false"><a href="#">تماس با ما</a>
 
                     </li>
+                    {% if request.user.is_authenticated %}
+                     <li style="float: right;"><a href="{% url 'accounts:logOut' %}">خروج</a>
+                         <li style="float: left;"><a href="#">{{ user.first_name }}</a>
+                 {% else %}
+                    <li style="float: right;"><a href="{% url 'accounts:register' %}">ثبت نام</a>
+                    <li style="float: right;"><a href="{% url 'accounts:login' %}">ورود</a>
+                {% endif %}
+
+
+
 
 
                 </ul>
