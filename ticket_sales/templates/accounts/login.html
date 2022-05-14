@@ -1,0 +1,30 @@
+{% extends '_layout/base.html' %}
+
+{% block title %}
+    ورود کاربر
+{% endblock %}
+
+{% block content %}
+    <!-- start section -->
+    <br>
+    <br>
+    <br>
+        <section class="p-5 wow animate__fadeIn">
+            <div class="container">
+                <div class="p-5 row justify-content-center">
+                    <div class="col-12 col-xl-5 offset-xl-1 col-md-6 lg-padding-30px-lr md-padding-15px-lr">
+                        <h6 class="alt-font font-weight-500 text-extra-dark-gray">ورود</h6>
+                        <form action="" method="post" class="border-all border-color-medium-gray padding-4-rem-all lg-margin-35px-top md-padding-2-half-rem-all">
+                            {% csrf_token %}
+                                {% for field in form_login %}
+                                    {{ field.label }}
+                                    {{ field }}
+                                {% endfor %}
+                            <button class="btn btn-medium btn-fancy btn-dark-gray w-100" type="submit">ورود</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- end section -->
+{% endblock %}

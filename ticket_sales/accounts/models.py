@@ -40,7 +40,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(max_length=50, blank=True, null=True, verbose_name=_("Last Name"), )
     email = models.EmailField(unique=True, verbose_name=_("email"), )
     phone_number = models.CharField(unique=True,max_length=20, blank=True, null=True, verbose_name=_("Phone Number"), )
-
+    national_code = models.PositiveIntegerField(unique=True, verbose_name=_('National Code'), blank=True, null=True )
     # auth fields
     is_staff = models.BooleanField(
         _('staff status'),
@@ -56,7 +56,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     update_date = models.DateTimeField(auto_now=True, verbose_name=_('Update Date'), )
     date_joined = models.DateTimeField(auto_now_add=True, verbose_name=_('Date Joined'), )
 
-    object = UserManager()
+    objects = UserManager()
 
     USERNAME_FIELD = 'phone_number'
     REQUIRED_FIELDS = ['email', 'first_name', 'last_name']
