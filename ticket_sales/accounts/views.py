@@ -22,30 +22,10 @@ class UserRegisterView(View):
     def post(self, request):
         form = self.form_class(request.POST)
         if form.is_valid():
-            cd = form.cleaned_data
-            form.save(commit=False)
-            new_user = User(
-                phone_number=cd['phone_number'],
-                email=cd['email'],
-                national_code=cd['national_code'],
-                first_name=cd['first_name'],
-                last_name=cd['last_name']
-            )
-            new_user.set_password('password')
-            new_user.save()
+            form.save()
             return redirect('events:index')
         return render(request, self.template_name, {'form_register': form})
 
-        #     cd = form.cleaned_data
-        #     User.objects.create_user(
-        #         phone_number=cd['phone_number'],
-        #         email=cd['email'],
-        #         password=cd['password'],
-        #         first_name=cd['first_name'],
-        #         last_name=cd['last_name']
-        #     )
-        #     return redirect('events:index')
-        # return render(request, self.template_name, {'form_register': form})
 
 
 class UserLoginView(View):

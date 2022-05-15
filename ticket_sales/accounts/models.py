@@ -36,11 +36,11 @@ class User(AbstractBaseUser, PermissionsMixin):
        """
 
     # properties
-    first_name = models.CharField(max_length=50, blank=True, null=True, verbose_name=_("نام"), )
-    last_name = models.CharField(max_length=50, blank=True, null=True, verbose_name=_("نام خانوادگی"), )
-    email = models.EmailField(unique=True, verbose_name=_("ایمیل"), )
-    phone_number = models.CharField(unique=True,max_length=20, blank=True, null=True, verbose_name=_("شماره موبایل"), )
-    national_code = models.CharField(max_length=10 ,unique=True, verbose_name=_('کدملی'), blank=True, null=True )
+    first_name = models.CharField(max_length=50,null=True, blank=True, verbose_name=_("نام"), )
+    last_name = models.CharField(max_length=50,null=True, blank=True, verbose_name=_("نام خانوادگی"), )
+    email = models.EmailField(unique=True, null=True, blank=True, verbose_name=_("ایمیل"), )
+    phone_number = models.CharField(unique=True, max_length=20, verbose_name=_("شماره موبایل"), )
+    national_code = models.CharField(max_length=10, unique=True, verbose_name=_('کدملی'), )
     # auth fields
     is_staff = models.BooleanField(
         _('staff status'),
@@ -59,7 +59,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'phone_number'
-    REQUIRED_FIELDS = ['email', 'national_code', 'first_name', 'last_name']
+    REQUIRED_FIELDS = ['email','national_code', 'first_name', 'last_name']
 
     class Meta:
         verbose_name = _("User")
