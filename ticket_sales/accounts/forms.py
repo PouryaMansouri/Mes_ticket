@@ -29,12 +29,27 @@ class RegistrationForm(forms.ModelForm):
             'last_name': 'نام خانوادگی',
         }
 
-        def clean_email(self):
-            email = self.cleaned_data['email']
-            user = User.objects.filter(email=email).exists()
-            if user:
-                raise ValidationError('این ایمیل وجود دارد')
-            return email
+        help_texts = {
+            'phone_number': 'این شماره تلفن از قبل ثبت شده است، لطفا شماره تلفن معتبر را وارد کنید',
+            'email': 'ایمیل منحصر به فرد وارد کنید',
+            'national_code': 'کاربر با این کد ملی وجود دارد',
+
+        }
+
+        # def clean_email(self):
+        #     email = self.cleaned_data['email']
+        #     user = User.objects.filter(email=email).exists()
+        #     if user:
+        #         raise ValidationError('این ایمیل وجود دارد')
+        #     return email
+        #
+        # def clean_phone_number(self):
+        #     phone_number = self.cleaned_data['phone_number']
+        #     user = User.objects.filter(phone_number=phone_number).exists()
+        #     if user:
+        #         return ValidationError('این شماره تلفن قبلا ثبت شده است')
+        #     return phone_number
+
 
 
 class LoginForm(forms.Form):
