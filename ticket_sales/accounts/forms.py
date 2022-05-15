@@ -13,7 +13,7 @@ class RegistrationForm(forms.ModelForm):
                   'first_name',
                   'last_name']
         widgets = {
-            'phone_number': forms.TextInput(attrs={'class': 'form-control','id':'id','name':'phone'}),
+            'phone_number': forms.TextInput(attrs={'class': 'form-control',}),
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
             'password': forms.PasswordInput(attrs={'class': 'form-control'}),
             'national_code': forms.TextInput(attrs={'class': 'form-control'}),
