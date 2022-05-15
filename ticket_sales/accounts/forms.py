@@ -38,8 +38,3 @@ class LoginForm(forms.Form):
     password = forms.CharField(label='رمز عبور',
                                widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
-    # class Meta:
-    #     widgets = {
-    #         'phone_number': forms.TextInput(attrs={'class': 'form-control'}),
-    #         'password': forms.PasswordInput(attrs={'class': 'form-control'}),
-    #     }
