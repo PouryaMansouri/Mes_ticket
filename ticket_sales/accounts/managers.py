@@ -1,5 +1,6 @@
 from django.contrib.auth.models import BaseUserManager
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
 
 class UserManager(BaseUserManager):
@@ -23,12 +24,13 @@ class UserManager(BaseUserManager):
                         User: The created user instance.
 
                     Raises:
-                        ValueError: If the given email is not unique.
+                        ValueError: If the given phone_number is not unique.
                 """
-        if not email:
-            raise ValueError(_('users must have an email address'))
+        if not phone_number:
+            raise ValueError(_('وارد کردن شماره تلفن اجباری است'))
         now = timezone.now()
-        email = self.normalize_email(email)
+        if email:
+            email = self.normalize_email(email)
         user = self.model(
             email=email,
             is_staff=is_staff,
@@ -59,7 +61,7 @@ class UserManager(BaseUserManager):
                 """
         return self._create_user(email, password, False, False, phone_number, **extra_fields)
 
-    def create_superuser(self, email, password, phone_number, **extra_fields):
+    def create_superuser(self, password, phone_number, email=None, **extra_fields):
         """Create and save a superuser with the given email and password.
 
                     Args:
@@ -77,4 +79,3 @@ class UserManager(BaseUserManager):
         user = self._create_user(email, password, True, True, phone_number, **extra_fields)
         user.save(using=self._db)
         return user
-
