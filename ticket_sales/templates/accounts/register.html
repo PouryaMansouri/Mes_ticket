@@ -1,6 +1,6 @@
 {% extends '_layout/base.html' %}
 {% load static %}
-{% load crispy_forms_filters %}
+{% load crispy_forms_tags  %}
 
 {% block title %}
     ورود کاربر
@@ -13,31 +13,12 @@
 
                 <div style="padding-top: 150px; padding-bottom: 150px" class="row justify-content-center">
 
-{#                errors#}
-                    {% if form_register.errors %}
-                                <div style="font-weight: bold; text-align: right; margin-top: 20px" class="alert alert-danger">
-                                {% for error in form_register %}
-                                    {{ error.errors }}
-                                {% endfor %}
-                                </div>
-                    {% endif %}
                     <div class="col-12 col-xl-5 offset-xl-1 col-md-6 lg-padding-30px-lr md-padding-15px-lr">
                         <h4 style="text-align: right" class="alt-font font-weight-500 text-extra-dark-gray">ثبت نام</h4>
                         <hr/>
                         <form action="" method="post" class="border-all border-color-medium-gray padding-4-rem-all lg-margin-35px-top md-padding-2-half-rem-all">
                             {% csrf_token %}
-                                <p style="text-align: right; font-size: 18px">:{{ form_register.phone_number.label }}</p>
-                            <p>{{ form_register.phone_number }}</p>
-                            <p style="text-align: right; font-size: 18px">:{{ form_register.email.label }}</p>
-                            <p>{{ form_register.email }}</p>
-                            <p style="text-align: right; font-size: 18px">:{{ form_register.password.label }}</p>
-                            <p>{{ form_register.password }}</p>
-                            <p style="text-align: right; font-size: 18px">:{{ form_register.national_code.label }}</p>
-                            <p>{{ form_register.national_code }}</p>
-                            <p style="text-align: right; font-size: 18px">:{{ form_register.first_name.label }}</p>
-                            <p>{{ form_register.first_name }}</p>
-                            <p style="text-align: right; font-size: 18px">:{{ form_register.last_name.label }}</p>
-                            <p>{{ form_register.last_name }}</p>
+                               {{ form_register|crispy }}
                             <button class="btn btn-medium btn-fancy btn-dark-gray w-100" type="submit">ثبت نام</button>
                         </form>
 
