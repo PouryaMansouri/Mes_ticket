@@ -36,11 +36,11 @@ class User(AbstractBaseUser, PermissionsMixin):
        """
 
     # properties
-    first_name = models.CharField(max_length=50, blank=True, null=True, verbose_name=_("First Name"), )
-    last_name = models.CharField(max_length=50, blank=True, null=True, verbose_name=_("Last Name"), )
-    email = models.EmailField(unique=True, verbose_name=_("email"), )
-    phone_number = models.CharField(unique=True,max_length=20, blank=True, null=True, verbose_name=_("Phone Number"), )
-    national_code = models.CharField(max_length=10 ,unique=True, verbose_name=_('National Code'), blank=True, null=True )
+    first_name = models.CharField(max_length=50, blank=True, null=True, verbose_name=_("نام"), )
+    last_name = models.CharField(max_length=50, blank=True, null=True, verbose_name=_("نام خانوادگی"), )
+    email = models.EmailField(unique=True, verbose_name=_("ایمیل"), )
+    phone_number = models.CharField(unique=True,max_length=20, blank=True, null=True, verbose_name=_("شماره موبایل"), )
+    national_code = models.CharField(max_length=10 ,unique=True, verbose_name=_('کدملی'), blank=True, null=True )
     # auth fields
     is_staff = models.BooleanField(
         _('staff status'),
@@ -53,8 +53,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         help_text=_('Designates whether this user should be treated as active. '
                     'Unselect this instead of deleting accounts.'),
     )
-    update_date = models.DateTimeField(auto_now=True, verbose_name=_('Update Date'), )
-    date_joined = models.DateTimeField(auto_now_add=True, verbose_name=_('Date Joined'), )
+    update_date = models.DateTimeField(auto_now=True, verbose_name=_('تاریخ بروزرسانی'), )
+    date_joined = models.DateTimeField(auto_now_add=True, verbose_name=_('تاریخ پیوستن'), )
 
     objects = UserManager()
 
