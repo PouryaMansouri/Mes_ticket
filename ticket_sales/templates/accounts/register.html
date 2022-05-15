@@ -1,5 +1,6 @@
 {% extends '_layout/base.html' %}
 {% load static %}
+{% load crispy_forms_filters %}
 
 {% block title %}
     ورود کاربر
@@ -9,7 +10,17 @@
     <!-- start section -->
             <section style="background-color: #ffa859 "  class="wow animate__fadeIn">
             <div class="container">
+
                 <div style="padding-top: 150px; padding-bottom: 150px" class="row justify-content-center">
+
+{#                errors#}
+                    {% if form_register.errors %}
+                                <div style="font-weight: bold; text-align: right; margin-top: 20px" class="alert alert-danger">
+                                {% for error in form_register %}
+                                    {{ error.errors }}
+                                {% endfor %}
+                                </div>
+                    {% endif %}
                     <div class="col-12 col-xl-5 offset-xl-1 col-md-6 lg-padding-30px-lr md-padding-15px-lr">
                         <h4 style="text-align: right" class="alt-font font-weight-500 text-extra-dark-gray">ثبت نام</h4>
                         <hr/>
@@ -30,14 +41,7 @@
                             <button class="btn btn-medium btn-fancy btn-dark-gray w-100" type="submit">ثبت نام</button>
                         </form>
 
-                        {% for field in form_register %}
-                            <div style="text-align: right; margin-top: 20px;font-weight: bold" class="fieldWrapper">
-                                {% if field.help_text %}
-                                <p class="help">{{ field.help_text|safe }}*</p>
 
-                                {% endif %}
-                            </div>
-                        {% endfor %}
                     </div>
                 </div>
             </div>
