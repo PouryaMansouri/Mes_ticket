@@ -16,19 +16,28 @@
                         <form action="" method="post" class="border-all border-color-medium-gray padding-4-rem-all lg-margin-35px-top md-padding-2-half-rem-all">
                             {% csrf_token %}
                                 <p style="text-align: right; font-size: 18px">:{{ form_register.phone_number.label }}</p>
-                            <div>{{ form_register.phone_number }}</div>
+                            <p>{{ form_register.phone_number }}</p>
                             <p style="text-align: right; font-size: 18px">:{{ form_register.email.label }}</p>
-                            <div>{{ form_register.email }}</div>
+                            <p>{{ form_register.email }}</p>
                             <p style="text-align: right; font-size: 18px">:{{ form_register.password.label }}</p>
-                            <div>{{ form_register.password }}</div>
+                            <p>{{ form_register.password }}</p>
                             <p style="text-align: right; font-size: 18px">:{{ form_register.national_code.label }}</p>
-                            <div>{{ form_register.national_code }}</div>
+                            <p>{{ form_register.national_code }}</p>
                             <p style="text-align: right; font-size: 18px">:{{ form_register.first_name.label }}</p>
-                            <div>{{ form_register.first_name }}</div>
+                            <p>{{ form_register.first_name }}</p>
                             <p style="text-align: right; font-size: 18px">:{{ form_register.last_name.label }}</p>
-                            <div>{{ form_register.last_name }}</div>
+                            <p>{{ form_register.last_name }}</p>
                             <button class="btn btn-medium btn-fancy btn-dark-gray w-100" type="submit">ثبت نام</button>
                         </form>
+
+                        {% for field in form_register %}
+                            <div style="text-align: right; margin-top: 20px;font-weight: bold" class="fieldWrapper">
+                                {% if field.help_text %}
+                                <p class="help">{{ field.help_text|safe }}*</p>
+
+                                {% endif %}
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
