@@ -37,7 +37,7 @@ TICKET_APPS = [
     'events',
     'teams',
     'accounts',
-    'player',
+    'players',
 ]
 
 THIRD_PARTY_APPS = [
