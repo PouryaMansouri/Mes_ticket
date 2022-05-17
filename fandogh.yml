@@ -1,0 +1,15 @@
+kind: ExternalService
+name: belitmes
+spec:
+  image_pull_policy: Always
+  port: 80
+  source:
+    context: .
+    media_path: media
+    project_type: django
+    python_version: '3.8'
+    static_path: static
+    wsgi: ticket_sales.wsgi
+  volume_mounts:
+  - mount_path: /usr/src/app/media
+    sub_path: belitmes/media

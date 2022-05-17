@@ -1,0 +1,16 @@
+kind: ManagedService
+name: redis
+spec:
+  service_name: redis
+  version: 6.0
+  parameters:
+    - name: redis_password
+      value: pass123
+    - name: redis_dashboard_enabled
+      value: 'true'
+    - name: redis_dashboard_username
+      value: user
+    - name: redis_dashboard_password
+      value: dashboardpassword
+  resources:
+      memory: 512Mi

@@ -1,0 +1,66 @@
+/**
+ * Torbara Maxx-Fitness Template for Joomla, exclusively on Envato Market: http://themeforest.net/user/torbara
+ * @encoding     UTF-8
+ * @version      1.0
+ * @copyright    Copyright (C) 2015 Torbara (http://torbara.com). All rights reserved.
+ * @license      GNU General Public License version 2 or later, see http://www.gnu.org/licenses/gpl-2.0.html
+ * @author       Alexandr Khmelnytsky (support@torbara.com)
+ */
+
+.akslider-module .uk-dotnav {
+    font-size: 0;
+    text-align: center !important;
+    display: block;
+}
+.akslider-module .uk-dotnav > li {
+    display: inline-block;
+    float: none;
+    
+}
+.akslider-module .uk-dotnav > li > a {
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    opacity: 0.5;
+    position: relative;
+     transition:400ms all; -webkit-transition:400ms all ;
+/* Uncomment this if you want gray effect for thumbs */
+/*    filter: gray;  IE6-9 
+    -webkit-filter: grayscale(100%);  Chrome 19+, Safari 6+, Safari 6+ iOS */
+}
+
+.akslider-module .uk-dotnav > li:hover > a {
+    opacity: 1;
+    background: #ffc722;
+/* Uncomment this if you want gray effect for thumbs */
+/*    filter: none;  IE6-9 
+    -webkit-filter: grayscale(0%);*/
+}
+
+.akslider-module .uk-dotnav > li.uk-active > a {
+    opacity: 1;
+    background: #ffc722;
+/* Uncomment this if you want gray effect for thumbs */
+/*    filter: none;  IE6-9 
+    -webkit-filter: grayscale(0%);*/
+}
+
+.akslider-module iframe {
+    pointer-events: none !important;
+}
+.akslider-module .uk-slidenav { margin-top: -40px !important; width:26px; height: 80px; line-height: 80px; background: rgba(255, 255, 255, 0.1)}
+.akslider-module .uk-slidenav:before { font-size: 40px; position: absolute;}
+.akslider-module .uk-slidenav:hover:before { color: #ffc722;}
+.akslider-module .uk-slidenav-position .uk-slidenav-previous {
+  left:0;  
+}
+.akslider-module .uk-slidenav-position .uk-slidenav-previous:before { left: 15%;}
+.akslider-module .uk-slidenav-position .uk-slidenav-next:before { right: 15%;}
+
+.akslider-module .uk-slidenav-position .uk-slidenav-next {
+  right:0;  
+}
+
+
+
+
