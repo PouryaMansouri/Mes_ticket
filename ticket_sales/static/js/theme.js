@@ -99,11 +99,11 @@ jQuery(window).load(function(){
     $grid1 = jQuery('.grid1');    
         $grid1.isotope({
             // options
-            itemSelector: '.players-item',
+            itemSelector: '.player-item',
             percentPosition: true,
             layoutMode: 'masonry',
             masonry: {
-                columnWidth:  $grid1.find('.players-item')[1]
+                columnWidth:  $grid1.find('.player-item')[1]
               }
 
         });  
@@ -112,11 +112,11 @@ jQuery(window).load(function(){
     jQuery('.filter-button-group').on( 'click', 'button', function() {
         $grid1.isotope({
             // options
-            itemSelector: '.players-item',
+            itemSelector: '.player-item',
             percentPosition: true,
             layoutMode: 'masonry',
             masonry: {
-                columnWidth:  $grid.find('.players-item')[1]
+                columnWidth:  $grid.find('.player-item')[1]
               }
 
         }); 
