@@ -1,0 +1,46 @@
+{% extends '_layout/base.html' %}
+
+{% block title %}
+    بلیط ها
+{% endblock %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+    {% if tickets %}
+    {% for item in tickets %}
+<table class="table table-striped table-dark">
+  <thead>
+    <tr>
+
+      <th scope="col">نام و نام خانوادگی</th>
+      <th scope="col">کد ملی</th>
+      <th scope="col">شماره تلفن</th>
+      <th scope="col">مسابقه</th>
+      <th scope="col">تاریخ رزرو</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+
+      <td>{{ item.full_name }}</td>
+      <td>{{ item.national_code }}</td>
+      <td>{{ item.phone }}</td>
+      <td>{{ item.event }}</td>
+      <td>{{ item.created_at }}</td>
+    </tr>
+  </tbody>
+</table>
+    {% endfor %}
+    {% else %}
+    <p>شما بلیطی تهیه نکردید</p>
+    {% endif %}
+{% endblock %}

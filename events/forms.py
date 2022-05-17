@@ -16,4 +16,3 @@ class TicketForm(forms.ModelForm):
     #     cleaned_data = super().full_clean()
     #     self.instance.event = Event.objects.first()
     #     return cleaned_data
-

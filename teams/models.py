@@ -19,3 +19,9 @@ class Team(BaseModel):
 
     def __str__(self):
         return self.name
+
+    @property
+    def get_logo_url(self):
+        if self.logo:
+            return self.logo.url
+        return "local/lkj"

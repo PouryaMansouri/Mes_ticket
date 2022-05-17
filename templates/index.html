@@ -73,7 +73,7 @@
                                 <div class="uk-grid uk-flex uk-flex-middle">
                                     <div class="uk-width-2-12 center">
                                         <a href="#">
-                                            <img src="{{ event.home_team.logo.url }}" class="img-polaroid" alt=""
+                                            <img src="{{ event.home_team.get_logo_url }}" class="img-polaroid" alt=""
                                                  title="">
                                         </a>
                                     </div>
@@ -97,7 +97,7 @@
                                     </div>
                                     <div class="uk-width-2-12 center">
                                         <a href="#">
-                                            <img src="{{ event.away_team.logo.url }}" class="img-polaroid" alt=""
+                                            <img src="{{ event.away_team.get_logo_url }}" class="img-polaroid" alt=""
                                                  title="">
                                         </a>
                                     </div>
