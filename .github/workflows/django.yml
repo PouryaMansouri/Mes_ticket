@@ -1,0 +1,52 @@
+name: Django CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+    
+env:
+  ## Sets environment variable
+  SECRET_KEY : 'yarqacwqe4b2iyy6csorlrktu'
+  DEBUG : True
+  DATABASE_URL : 'postgres://postgres:postgres@localhost:5432/postgres'
+  ENGINE : 'django.db.backends.postgresql'
+  NAME : 'shop_api'
+  USER : 'emad'
+  PASSWORD : '123456'
+  HOST: 'localhost'
+  PORT: '5432'
+  EMAIL_BACKEND: 'django.core.mail.backends.smtp.EmailBackend'
+  MAILER_EMAIL_BACKEND: 'django.core.mail.backends.smtp.EmailBackend'
+  EMAIL_HOST: 'smtp.gmail.com'
+  EMAIL_HOST_PASSWORD: ''
+  EMAIL_HOST_USER: ''
+  EMAIL_PORT: 465
+  EMAIL_USE_SSL: True
+  DEFAULT_FROM_EMAIL: ''
+
+
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.7, 3.8, 3.9]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Run Tests
+      run: |
+        python manage.py test
