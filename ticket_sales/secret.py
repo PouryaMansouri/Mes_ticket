@@ -1,7 +1,7 @@
 import os
 
 # Set environment variables
-test = "server"
+test = "servیer"
 if test == "server":
     os.environ['APP_SECRET_KEY'] = 'django-insecure-_3%up&jx^vfhsdfasdfaw3rawdfsdefaw3'
     os.environ['DJANGO_DEBUG'] = 'False'
