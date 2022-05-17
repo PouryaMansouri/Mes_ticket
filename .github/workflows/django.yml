@@ -5,6 +5,28 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+    
+env:
+  ## Sets environment variable
+  SECRET_KEY : 'yarqacwqe4b2iyy6csorlrktu'
+  DEBUG : True
+  DATABASE_URL : 'postgres://postgres:postgres@localhost:5432/postgres'
+  ENGINE : 'django.db.backends.postgresql'
+  NAME : 'shop_api'
+  USER : 'emad'
+  PASSWORD : '123456'
+  HOST: 'localhost'
+  PORT: '5432'
+  EMAIL_BACKEND: 'django.core.mail.backends.smtp.EmailBackend'
+  MAILER_EMAIL_BACKEND: 'django.core.mail.backends.smtp.EmailBackend'
+  EMAIL_HOST: 'smtp.gmail.com'
+  EMAIL_HOST_PASSWORD: ''
+  EMAIL_HOST_USER: ''
+  EMAIL_PORT: 465
+  EMAIL_USE_SSL: True
+  DEFAULT_FROM_EMAIL: ''
+
+
 
 jobs:
   build:
