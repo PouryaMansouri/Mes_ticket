@@ -24,4 +24,4 @@ class Team(BaseModel):
     def get_logo_url(self):
         if self.logo:
             return self.logo.url
-        return "local/lkj"
+        return None
