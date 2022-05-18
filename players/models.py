@@ -11,9 +11,14 @@ class Player(BaseModel):
     age = models.SmallIntegerField(verbose_name=_('سن '))
     goal = models.SmallIntegerField(verbose_name=_(' گل زده '))
 
-
     class Meta:
         ordering = ('-goal',)
 
     def __str__(self):
         return f"{self.full_name} {self.number}"
+
+    def get_pic(self):
+        if self.pic:
+            return self.pic.url
+        return None
+

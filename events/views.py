@@ -16,13 +16,13 @@ class Index(FormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
         players = Player.objects.all()[:4]
         event = Event.objects.last()
         context['players'] = players
         context['event'] = event
         context['event_date'] = event.str_event_time
         return context
+
 
 class TicketView(LoginRequiredMixin, View):
     def get(self, request):
