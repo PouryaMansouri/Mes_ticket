@@ -128,6 +128,11 @@
                                                             style="font-family: b yekan">ظرفیت ورزشگاه تکمیل است
                                                     </button>
 
+                                                {% elif not event.is_sell_time %}
+                                                    <button type="button" class="btn btn-danger"
+                                                            style="font-family: b yekan">مدت زمان رزرو بلیط به پایان رسیده است
+                                                    </button>
+
                                                 {% else %}
                                                     <button id="buy-ticket-button" type="button" class="read-more"
                                                                 style="font-family: b yekan"

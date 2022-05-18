@@ -21,6 +21,7 @@ class Event(BaseModel):
     class Meta:
         verbose_name = _('رویداد')
         verbose_name_plural = _('رویداد')
+        ordering = ('-event_time',)
 
     home_team = models.ForeignKey(
         Team,
@@ -38,6 +39,11 @@ class Event(BaseModel):
 
     event_time = jmodels.jDateTimeField(
         verbose_name=_('زمان برگزاری'),
+        null=True,
+    )
+
+    sell_time = jmodels.jDateTimeField(
+        verbose_name=_('زمان فروش بلیط'),
         null=True,
     )
 
@@ -60,9 +66,9 @@ class Event(BaseModel):
         verbose_name=_('ظرفیت کل')
     )
 
-    remaining_capacity = models.PositiveIntegerField(
-        verbose_name=_('ظرفیت باقیمانده'),
-    )
+    ticket_sell = models.PositiveIntegerField(
+        verbose_name=_('بلیط فروخته شده'), default=0
+        )
 
     price = models.PositiveIntegerField(
         verbose_name=_('قیمت'),
@@ -77,11 +83,6 @@ class Event(BaseModel):
             'زمانی که ظرفیت رویداد به پایان برسد یا ادمین سایت این گزینه را لغو کند، امکان خرید بلیط برای این رویداد غیرفعال خواهد شد.')
     )
 
-    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
-        if not self.pk:
-            self.remaining_capacity = self.total_capacity
-        super().save(force_insert, force_update, using, update_fields)
-
     def __str__(self):
         return f'{self.home_team.name} | {self.away_team.name}'
 
@@ -94,9 +95,15 @@ class Event(BaseModel):
 
     @property
     def is_capacity(self):
-        if self.remaining_capacity == 0:
+        if self.ticket_sell == self.total_capacity:
             return False
         return True
+
+    @property
+    def is_sell_time(self):
+        if self.sell_time < self.event_time:
+            return True
+        return False
 
     @property
     def str_event_time(self) -> str:

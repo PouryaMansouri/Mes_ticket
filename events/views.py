@@ -1,3 +1,4 @@
+import jdatetime
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -17,7 +18,8 @@ class Index(FormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         players = Player.objects.all()[:4]
-        event = Event.objects.last()
+        now = jdatetime.datetime.now()
+        event = Event.objects.filter(event_time__gt=now).last()
         context['players'] = players
         context['event'] = event
         context['event_date'] = event.str_event_time
