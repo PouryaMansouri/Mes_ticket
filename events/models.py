@@ -162,8 +162,8 @@ class Ticket(BaseModel):
     )
 
     def event_capacity_reducer(self):
-        self.event.remaining_capacity -= 1
-        if self.event.remaining_capacity == 0:
+        self.event.ticket_sell += 1
+        if self.event.ticket_sell == self.event.total_capacity :
             self.event.is_available = False
         self.event.save()
 
